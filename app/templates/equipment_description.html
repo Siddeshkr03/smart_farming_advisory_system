@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ equipment.get('name', 'Equipment Description') }}
+{% endblock title %}
+
+{% block body %}
+    <div class="container mt-3">
+        <h2>{{ equipment.get('name') }}</h2>
+        <div class="row">
+            {% if equipment.get('image_url') %}
+                <div class="col-md-4">
+                    <img src="{{ equipment['image_url'] }}" class="img-fluid" alt="{{ equipment['name'] }}">
+                </div>
+                <div class="col-md-8">
+                    <p>{{ equipment.get('description') }}</p>
+                    <p><strong>Category:</strong> {{ equipment.get('category') }}</p>
+                    <p><strong>Brand:</strong> {{ equipment.get('brand') }}</p>
+                    <p><strong>Rental Price:</strong> Rs {{ equipment.get('rental_price', 0) }}</p>
+                    <p><strong>Total Available:</strong> {{ equipment.get('total_quantity', 0) }}</p>
+                    <p><strong>Currently Available:</strong> {{ equipment.get('available_quantity', 0) }}</p>
+                    <form action="{{ url_for('add_to_cart') }}" method="post">
+                        <input type="hidden" name="equipment_id" value="{{ equipment.get('id') }}">
+                        <button type="submit" class="btn btn-primary">Add to Cart</button>
+                        <a href="{{ url_for('equipment') }}" class="btn btn-secondary ml-2">Back to Equipment</a>
+                    </form>
+                </div>
+            {% else %}
+                <div class="col-md-12">
+                    <p>{{ equipment.get('description') }}</p>
+                    <p><strong>Category:</strong> {{ equipment.get('category') }}</p>
+                    <p><strong>Brand:</strong> {{ equipment.get('brand') }}</p>
+                    <p><strong>Rental Price:</strong> Rs {{ equipment.get('rental_price', 0) }}</p>
+                    <p><strong>Total Available:</strong> {{ equipment.get('total_quantity', 0) }}</p>
+                    <p><strong>Currently Available:</strong> {{ equipment.get('available_quantity', 0) }}</p>
+                    <form action="{{ url_for('add_to_cart') }}" method="post">
+                        <input type="hidden" name="equipment_id" value="{{ equipment.get('id') }}">
+                        <button type="submit" class="btn btn-primary">Add to Cart</button>
+                        <a href="{{ url_for('equipment') }}" class="btn btn-secondary ml-2">Back to Equipment</a>
+                    </form>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock body %}

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seasonal Crop Planner</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif; /* Using a common font */
+            background-color: #f3f9f3; /* Light green background */
+            color: #333;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        h2, h3, h4 {
+            color: #2a613c; /* Darker green heading color */
+            margin-bottom: 15px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px; /* Space between cards */
+        }
+
+        /* Custom button style for agriculture theme */
+        .btn-agriculture {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-agriculture:hover {
+            background-color: #388E3C; /* Darker green on hover */
+            color: white;
+        }
+
+        /* Bootstrap overrides for form controls */
+        .form-control, .form-select {
+            border-radius: 5px;
+            border-color: #ccc;
+        }
+
+        .form-label {
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        /* Radio button styling */
+        .form-check-label {
+             margin-right: 15px;
+             cursor: pointer;
+        }
+
+        /* Roadmap timeline styling */
+        #roadmap-output {
+            position: relative;
+            padding: 30px 20px; /* Increased padding */
+            background-color: #ffffff; /* White background for roadmap area */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+            /* No padding-left needed here anymore */
+        }
+
+        #roadmap-output h3 {
+            text-align: center;
+            color: #2a613c; /* Match heading color */
+            margin-bottom: 30px; /* Space below heading */
+        }
+
+        .roadmap-container {
+            position: relative;
+            margin-bottom: 40px; /* Space between steps */
+            overflow: visible; /* Allow pseudo-elements to render outside */
+            /* Padding left to create the central gutter space */
+            padding-left: 50px; /* Creates space for the central line/dots */
+        }
+
+        .roadmap-container:last-child {
+            margin-bottom: 0; /* No space after the last step */
+        }
+
+        /* Vertical line segment within each container */
+        /* Connects the dot in this step to the dot in the next step */
+        .roadmap-container::before {
+            content: '';
+            position: absolute;
+            left: 25px; /* Position within the 50px padding-left space */
+            top: 25px; /* Start of the line (approx. vertical center of dot) */
+            bottom: -20px; /* Extend line halfway into the bottom margin */
+            width: 3px; /* Thicker line */
+            background-color: #4CAF50; /* Green line color */
+            transform: translateX(-50%); /* Center line within the left space */
+            z-index: 0; /* Behind content */
+        }
+
+         /* Adjust the line segment for the LAST container */
+         /* It should end at the dot, not extend into the margin */
+        .roadmap-container:last-child::before {
+             bottom: 8px; /* End position (approx. vertical center of dot) */
+        }
+
+
+        .roadmap-dot {
+             position: absolute;
+             left: 25px; /* Position within the 50px padding-left space */
+             top: 17px; /* Position relative to container top, vertically aligned with content start */
+             width: 16px; /* Larger dot */
+             height: 16px; /* Larger dot */
+             background-color: #e9f5e9; /* Dot background (light green) */
+             border: 3px solid #4CAF50; /* Dot border (green) */
+             border-radius: 50%;
+             z-index: 1; /* Above the line */
+             transform: translateX(-50%); /* Center the dot within the left space */
+        }
+
+        .roadmap-content {
+            width: calc(100% - 50px); /* Take up full width of the right side (100% of container - 50px padding) */
+            padding: 20px;
+            border: 1px solid #d4e4d4; /* Light green border */
+            border-radius: 8px;
+            background-color: #fefefe; /* Content background */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            position: relative; /* Needed for horizontal line pseudo-element */
+        }
+
+        /* Horizontal line pseudo-element attached to content */
+        .roadmap-content::before {
+            content: '';
+            position: absolute;
+            top: 50%; /* Vertically center with content */
+            width: 25px; /* Length of the horizontal line (adjust as needed) */
+            height: 2px;
+            background-color: #4CAF50;
+            transform: translateY(-50%);
+            z-index: 1; /* Above vertical line */
+        }
+
+        /* Position the horizontal line based on left/right step */
+        .roadmap-step.left .roadmap-content {
+            float: left;
+             /* Removed margin-right */
+        }
+
+        .roadmap-step.left .roadmap-content::before {
+            left: 100%; /* Position to the right of the left content box */
+        }
+
+        .roadmap-step.right .roadmap-content {
+            float: right;
+             /* Removed margin-left */
+        }
+
+        .roadmap-step.right .roadmap-content::before {
+            right: 100%; /* Position to the left of the right content box */
+        }
+
+         .roadmap-step::after { /* Clear float after each step */
+             content: "";
+             display: table;
+             clear: both;
+         }
+
+         #loading-message {
+             text-align: center;
+             margin-top: 20px;
+             font-style: italic;
+             color: #777;
+         }
+
+         /* Adjusting form layout slightly */
+         .form-group {
+             margin-bottom: 15px;
+         }
+    </style>
+</head>
+<body>
+
+    <div class="container mt-4"> <div class="card"> <div class="card-body">
+                <div class="season-selection">
+                    <h2>Select a Season</h2>
+                    <div class="row"> <div class="col-md-3 col-sm-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="season" value="spring" id="spring" onclick="displayCrops('spring')">
+                                <label class="form-check-label" for="spring">Spring</label>
+                            </div>
+                        </div>
+                         <div class="col-md-3 col-sm-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="season" value="summer" id="summer" onclick="displayCrops('summer')">
+                                <label class="form-check-label" for="summer">Summer</label>
+                            </div>
+                        </div>
+                         <div class="col-md-3 col-sm-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="season" value="autumn" id="autumn" onclick="displayCrops('autumn')">
+                                <label class="form-check-label" for="autumn">Autumn</label>
+                            </div>
+                        </div>
+                         <div class="col-md-3 col-sm-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="season" value="winter" id="winter" onclick="displayCrops('winter')">
+                                <label class="form-check-label" for="winter">Winter</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="crop-list" class="card"> <div class="card-body">
+                </div>
+        </div>
+
+        <div id="crop-details" class="card" style="display:none;"> <div class="card-body">
+                <h3>Enter crop details for <span id="selected-crop-name"></span></h3>
+                <h4>AI-powered crop roadmap generator</h4>
+
+                <form id="crop-form">
+                    <div class="row"> <div class="col-md-6 form-group">
+                            <label for="crop-type" class="form-label">Crop Type:</label>
+                            <input type="text" id="crop-type" class="form-control" required disabled>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label for="region" class="form-label">Region/Location:</label>
+                            <input type="text" id="region" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label for="soil-type" class="form-label">Soil Type:</label>
+                            <input type="text" id="soil-type" class="form-control" required>
+                        </div>
+                        <div class="col-md-6 form-group">
+                             <label for="season-display" class="form-label">Season:</label>
+                            <input type="text" id="season-display" class="form-control" required disabled>
+                             <input type="hidden" id="season-value">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label for="sowing-date" class="form-label">Sowing Date:</label>
+                            <input type="date" id="sowing-date" class="form-control" required>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label for="harvest-date" class="form-label">Expected Harvesting Date:</label>
+                            <input type="date" id="harvest-date" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-agriculture mt-3" onclick="generateRoadmap()">Generate Roadmap</button>
+                </form>
+
+                <div id="loading-message" class="mt-3" style="display:none;">Generating roadmap... Please wait.</div>
+                <div id="roadmap-output" class="mt-4">
+                    </div>
+            </div>
+        </div>
+
+    </div> <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const crops = {
+            spring: {
+                vegetables: ['Peas', 'Cucumbers', 'Gourds (Bottle Gourd, Bitter Gourd)', 'Tomatoes'],
+                fruits: ['Watermelon', 'Muskmelon'],
+                other: ['Potatoes', 'Capsicum']
+            },
+            summer: {
+                vegetables: ['Cucumber', 'Tomatoes', 'Okra (Ladyfinger)', 'Bitter Gourd', 'Bottle Gourd', 'Ridge Gourd'],
+                fruits: ['Watermelon', 'Muskmelon', 'Mango'],
+                other: ['Maize', 'Groundnut', 'Sesame']
+            },
+            autumn: {
+                cereals: ['Rice', 'Maize', 'Millet (Bajra, Jowar)'],
+                pulses: ['Green Gram (Moong)', 'Black Gram (Urad)', 'Pigeon Pea (Arhar)'],
+                oilseeds: ['Soybean', 'Groundnut'],
+                fruits: ['Mango', 'Guava']
+            },
+            winter: {
+                cereals: ['Wheat', 'Barley', 'Oats'],
+                pulses: ['Chickpeas (Gram)', 'Lentils'],
+                oilseeds: ['Mustard', 'Linseed'],
+                vegetables: ['Spinach', 'Carrot', 'Radish', 'Cabbage']
+            }
+        };
+
+        // **SECURITY WARNING:** Hardcoding API keys in client-side code is INSECURE.
+        // Anyone viewing your page source can steal this key and use it.
+        // This key should ideally be used on a secure backend server.
+        const TOGETHER_API_KEY = "c9b53c3c609c62d07a4045bec4e29ffafe725225e209b3a47573c4b4c4f7d210";
+        const TOGETHER_API_URL = 'https://api.together.xyz/v1/chat/completions'; // Together AI Chat Completions endpoint
+        // Using the model you identified
+        const AI_MODEL = 'meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8';
+
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
+        function displayCrops(season) {
+            const cropListBody = document.querySelector('#crop-list .card-body');
+            cropListBody.innerHTML = `<h3>${capitalizeFirstLetter(season)} Crops</h3>`;
+
+            const cropsForSeason = crops[season];
+            if (cropsForSeason) {
+                 Object.keys(cropsForSeason).forEach(category => {
+                    if (cropsForSeason[category] && cropsForSeason[category].length > 0) {
+                        const categoryHeader = `<h4>${capitalizeFirstLetter(category)}</h4>`;
+                        // Use Bootstrap button classes and custom agriculture style
+                        const cropItems = cropsForSeason[category].map(crop => `<button type="button" class="btn btn-sm btn-outline-success m-1" onclick="selectCrop('${crop}', '${season}')">${crop}</button>`).join('');
+                        cropListBody.innerHTML += categoryHeader + cropItems;
+                    }
+                });
+            } else {
+                cropListBody.innerHTML += '<p>No crop data available for this season.</p>';
+            }
+
+            // Hide crop details form and roadmap output when changing season
+            document.getElementById('crop-details').style.display = 'none';
+            document.getElementById('roadmap-output').innerHTML = ''; // Clear previous output
+            document.getElementById('loading-message').style.display = 'none'; // Hide loading message
+        }
+
+        function selectCrop(crop, season) {
+            // Show the crop details form
+            document.getElementById('crop-details').style.display = 'block';
+            // Set the heading for the form
+            document.getElementById('selected-crop-name').textContent = crop;
+
+            // Populate the disabled crop type input
+            document.getElementById('crop-type').value = crop;
+
+            // Populate the disabled season display input and the hidden value input
+            document.getElementById('season-display').value = capitalizeFirstLetter(season);
+            document.getElementById('season-value').value = season; // Store lowercase value for API
+
+            // Clear previous roadmap output and loading message
+            document.getElementById('roadmap-output').innerHTML = '';
+            document.getElementById('loading-message').style.display = 'none';
+        }
+
+         // Function to format and display the roadmap steps
+        function displayRoadmap(stepsArray) {
+            const roadmapOutputDiv = document.getElementById('roadmap-output');
+            roadmapOutputDiv.innerHTML = '<h3>AI-powered Crop Growth Roadmap</h3>'; // Clear previous content and add heading
+
+            if (stepsArray.length === 0) {
+                roadmapOutputDiv.innerHTML += '<p>Could not generate detailed roadmap steps.</p>';
+                return;
+            }
+
+            let stepIndex = 0;
+            stepsArray.forEach(step => {
+                // Split the step into name and description
+                const parts = step.split('::');
+                const stepName = parts[0].trim();
+                const stepDescription = parts.length > 1 ? parts[1].trim() : 'No description provided.';
+
+                const stepElement = document.createElement('div');
+                stepElement.classList.add('roadmap-container', 'roadmap-step');
+                // Alternate left and right classes
+                stepElement.classList.add(stepIndex % 2 === 0 ? 'left' : 'right');
+
+                // The dot, vertical line segment, and horizontal line are handled by CSS pseudo-elements on the container and dot
+
+                stepElement.innerHTML = `
+                    <div class="roadmap-dot"></div>
+                    <div class="roadmap-content">
+                        <h4>${stepName}</h4>
+                        <p>${stepDescription}</p>
+                    </div>
+                `;
+
+                roadmapOutputDiv.appendChild(stepElement);
+                stepIndex++;
+            });
+        }
+
+
+        async function generateRoadmap() {
+            const cropType = document.getElementById('crop-type').value;
+            const region = document.getElementById('region').value;
+            const soilType = document.getElementById('soil-type').value;
+            const season = document.getElementById('season-value').value; // Get value from hidden input
+            const sowingDate = document.getElementById('sowing-date').value;
+            const harvestDate = document.getElementById('harvest-date').value;
+
+            // Basic validation
+            if (!cropType || !region || !soilType || !season || !sowingDate || !harvestDate) {
+                alert("Please fill in all crop details before generating the roadmap.");
+                return;
+            }
+
+            document.getElementById('roadmap-output').innerHTML = ''; // Clear previous output
+            document.getElementById('loading-message').style.display = 'block'; // Show loading message
+
+             // Construct the prompt for the AI model - asking for the same format
+            const prompt = `As an expert agricultural advisor, provide a detailed growth roadmap for cultivating ${cropType} in ${region}, considering ${soilType} soil, planned for the ${season} season, with sowing around ${sowingDate} and expected harvest around ${harvestDate}. List the key stages of growth and care. For each stage, provide a specific description relevant to these conditions.
+
+            Format the output as a list of stages and descriptions, separated by '::', with each stage on a new line:
+            Stage Name::Detailed Description relevant to ${cropType}, ${region}, ${soilType}, ${season}, sowing date, and harvest date.
+            Next Stage Name::Detailed Description...
+            ...up to Harvest.
+
+            Ensure stage names are concise (e.g., "Soil Preparation", "Sowing", "Germination", etc.).`;
+
+
+            const payload = {
+                model: AI_MODEL,
+                messages: [
+                    { role: "system", content: "You are an expert agricultural advisor providing detailed crop growth roadmaps. Provide concise stage names and detailed descriptions relevant to the user inputs." },
+                    { role: "user", content: prompt }
+                ],
+                max_tokens: 1500, // Increased tokens for potentially longer descriptions
+                temperature: 0.7, // Adjust for creativity vs. focus
+                // Together AI specific parameters might be added here if needed
+            };
+
+            try {
+                const response = await fetch(TOGETHER_API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${TOGETHER_API_KEY}` // Use the API key here
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                document.getElementById('loading-message').style.display = 'none'; // Hide loading message
+
+                if (!response.ok) {
+                     const errorData = await response.json();
+                     console.error('API Error:', errorData);
+                    throw new Error(`API error! status: ${response.status}, message: ${errorData.error ? errorData.error.message : response.statusText}`);
+                }
+
+                const data = await response.json();
+                console.log("API Response:", data); // Log the full response for debugging
+
+                // Extract the content from the AI response
+                const aiContent = data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content;
+
+                if (aiContent) {
+                    // Parse the content based on the expected format "Stage Name::Description\n"
+                    const steps = aiContent.split('\n').filter(line => line.trim() !== ''); // Split by newline and remove empty lines
+
+                     // Display the steps using the new format
+                    displayRoadmap(steps);
+
+                } else {
+                     document.getElementById('roadmap-output').innerHTML = `
+                         <h3>AI-powered Crop Growth Roadmap</h3>
+                         <p>API call successful, but no content received from the AI.</p>
+                     `;
+                 }
+
+            } catch (error) {
+                console.error('Error generating roadmap:', error);
+                document.getElementById('loading-message').style.display = 'none'; // Hide loading message
+                document.getElementById('roadmap-output').innerHTML = `
+                    <h3>AI-powered Crop Growth Roadmap</h3>
+                    <p style="color: red;">Error generating roadmap: ${error.message}.</p>
+                    <p>Please check the console for details and ensure your API key is correct and the service is running.</p>
+                `;
+            }
+        }
+
+
+        // Optional: Display initial season crops when the page loads (e.g., Spring)
+        // window.onload = function() {
+        //     document.getElementById('spring').checked = true;
+        //     displayCrops('spring');
+        // }
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

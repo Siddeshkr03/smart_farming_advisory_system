@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Language Switcher</title>
+</head>
+<body>
+    <h1><span data-translate="greeting">{% trans %}Hello{% endtrans %}</span></h1>
+    <p><span data-translate="intro">{% trans %}Welcome to our site!{% endtrans %}</span></p>
+    <p><span data-translate="description">{% trans %}This is some descriptive text.{% endtrans %}</span></p>
+    <button data-translate="myButton">{% trans %}Click Me{% endtrans %}</button>
+
+    <select id="languageSelect">
+        <option value="en">English</option>
+        <option value="hi">Hindi</option>
+        <option value="kn">Kannada</option>
+    </select>
+
+    <script>
+        const translations = {
+            en: {
+                greeting: "Hello",
+                intro: "Welcome to our site!",
+                description: "This is some descriptive text.",
+                myButton: "Click Me"
+            },
+            hi: {
+                greeting: "नमस्ते", // Namaste
+                intro: "हमारी साइट में आपका स्वागत है!", // Hamari site mein aapka swagat hai!
+                description: "यह कुछ वर्णनात्मक पाठ है।", // Yah kuchh varnanatmak paath hai.
+                myButton: "मुझे क्लिक करें" // Mujhe click karein
+            },
+            kn: {
+                greeting: "ನಮಸ್ಕಾರ", // Namaskara
+                intro: "ನಮ್ಮ ಸೈಟ್‌ಗೆ ಸುಸ್ವಾಗತ!", // Namma sitege suswagatha!
+                description: "ಇದು ಕೆಲವು ವಿವರಣಾತ್ಮಕ ಪಠ್ಯ.", // Idu kelavu vivaranatmak pathya.
+                myButton: "ನನ್ನನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ" // Nannannu click maadi
+            }
+        };
+
+        const languageSelect = document.getElementById("languageSelect");
+
+        function translatePage(lang) {
+            const currentTranslations = translations[lang];
+            if (currentTranslations) {
+                document.querySelectorAll("[data-translate]").forEach(element => {
+                    const key = element.dataset.translate;
+                    element.textContent = currentTranslations[key] || element.dataset.originalText || element.textContent; // Fallback
+                });
+            }
+        }
+
+        // Store original text in data attributes for fallback
+        document.querySelectorAll("[data-translate]").forEach(el => {
+            el.dataset.originalText = el.textContent;
+        });
+
+        // Initial translation on page load
+        const initialLanguage = localStorage.getItem('selectedLanguage') || 'en'; // Get stored language or default to 'en'
+        languageSelect.value = initialLanguage;
+        translatePage(initialLanguage);
+
+        languageSelect.addEventListener("change", (event) => {
+            const selectedLanguage = event.target.value;
+            translatePage(selectedLanguage);
+            localStorage.setItem('selectedLanguage', selectedLanguage); // Store selected language
+        });
+    </script>
+</body>
+</html>

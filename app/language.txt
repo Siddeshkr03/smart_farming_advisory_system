@@ -1,0 +1,435 @@
+base.html
+English Text	Kannada (ಕನ್ನಡ)	Hindi (हिन्दी)
+KrishiJyoti	ಕೃಷಿಜ್ಯೋತಿ	कृषिज्योति
+Home	ಮುಖಪುಟ	होम
+Equipment Rental	ಬಾಡಿಗೆಗೆ ಸಲಕರಣೆಗಳು	उपकरण किराया
+Agro Products	ಕೃಷಿ ಉತ್ಪನ್ನಗಳು	कृषि उत्पाद
+AI Help	AI ಸಹಾಯ	एआई मदद
+Worker	ಕೆಲಸಗಾರ	कर्मचारी
+Crop Test	ಬೆಳೆ ಪರೀಕ್ಷೆ	फसल परीक्षण
+Logout	ಲಾಗ್ ಔಟ್	लॉग आउट
+Signup	ಸೈನ್ ಅಪ್	साइन अप
+More	ಇನ್ನಷ್ಟು	और
+Farmer Register	ರೈತ ನೋಂದಣಿ	किसान पंजीकरण
+Add Farming	ಕೃಷಿ ಸೇರಿಸಿ	खेती जोड़ें
+Farmer Details	ರೈತರ ವಿವರಗಳು	किसान विवरण
+Cart	ಖರೀದಿ ಗಾಡಿ	कार्ट
+Gov Schemes	ಸರ್ಕಾರಿ ಯೋಜನೆಗಳು	सरकारी योजनाएँ
+Map	ನಕ್ಷೆ	मानचित्र
+Live Prices	ನೇರ ಬೆಲೆಗಳು	लाइव कीमतें
+Transport	ಸಾರಿಗೆ	परिवहन
+Disease	ರೋಗ	रोग
+Welcome	ಸ್ವಾಗತ	स्वागत
+SELL AGRO PRODUCTS AND BUY	ಕೃಷಿ ಉತ್ಪನ್ನಗಳನ್ನು ಮಾರಾಟ ಮಾಡಿ ಮತ್ತು ಖರೀದಿಸಿ	कृषि उत्पाद बेचें और खरीदें
+AGRO PRODUCTS	ಕೃಷಿ ಉತ್ಪನ್ನಗಳು	कृषि उत्पाद
+Close	ಮುಚ್ಚಿ	बंद करें
+
+
+about.html
+English Text	Kannada (ಕನ್ನಡ)	Hindi (हिन्दी)
+About Us	ನಮ್ಮ ಬಗ್ಗೆ	हमारे बारे में
+
+
+addagroproducts.html
+English Text	Kannada (ಕನ್ನಡ)	Hindi (हिन्दी)
+Add Agro Products	ಕೃಷಿ ಉತ್ಪನ್ನಗಳನ್ನು ಸೇರಿಸಿ	कृषि उत्पाद जोड़ें
+Add Product	ಉತ್ಪನ್ನ ಸೇರಿಸಿ	उत्पाद जोड़ें
+Farmer Name	ರೈತರ ಹೆಸರು	किसान का नाम
+Farmer Email	ರೈತರ ಇಮೇಲ್	किसान का ईमेल
+Product Name	ಉತ್ಪನ್ನದ ಹೆಸರು	उत्पाद का नाम
+Product Image URL (Optional)	ಉತ್ಪನ್ನದ ಚಿತ್ರ URL (ಐಚ್ಛಿಕ)	उत्पाद चित्र URL (वैकल्पिक)
+Enter the URL of the product image	ಉತ್ಪನ್ನದ ಚಿತ್ರದ URL ಅನ್ನು ಇಲ್ಲಿ ಅಂಟಿಸಿ.	उत्पाद चित्र का URL यहाँ पेस्ट करें।
+You can paste a link to an image of the product here.	ನೀವು ಇಲ್ಲಿ ಉತ್ಪನ್ನದ ಚಿತ್ರಕ್ಕೆ ಲಿಂಕ್ ಅನ್ನು ಅಂಟಿಸಬಹುದು.	आप यहाँ उत्पाद की छवि का लिंक पेस्ट कर सकते हैं।
+Product Description	ಉತ್ಪನ್ನದ ವಿವರಣೆ	उत्पाद विवरण
+Price	ಬೆಲೆ	मूल्य
+
+
+agroproducts.html
+
+English Text	Kannada (ಕನ್ನಡ)	Hindi (हिन्दी)
+Agro Products	ಕೃಷಿ ಉತ್ಪನ್ನಗಳು	कृषि उत्पाद
+No Image Available	ಚಿತ್ರ ಲಭ್ಯವಿಲ್ಲ	कोई चित्र उपलब्ध नहीं है
+Price :	ಬೆಲೆ :	मूल्य :
+Owner :	ಮಾಲೀಕರು :	मालिक :
+Email :	ಇಮೇಲ್ :	ईमेल :
+Purchase	ಖರೀದಿಸಿ	खरीदें
+Delete	ಅಳಿಸಿ	हटाएं
+Are you sure you want to delete this product?	ಈ ಉತ್ಪನ್ನವನ್ನು ಅಳಿಸಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುತ್ತೀರಾ?	क्या आप वाकई इस उत्पाद को हटाना चाहते हैं?
+
+
+auth.html
+English Text	Kannada (ಕನ್ನಡ)	Hindi (हिन्दी)
+KrishiJyoti	ಕೃಷಿಜ್ಯೋತಿ	कृषिज्योति
+Developed by	ಅಭಿವೃದ್ಧಿಪಡಿಸಿದವರು	द्वारा विकसित
+Keshav T M	Keshav T M	Keshav T M
+
+
+cart.html
+English Text	Kannada (ಕನ್ನಡ)	Hindi (हिन्दी)
+Your Shopping Cart	ನಿಮ್ಮ ಖರೀದಿ ಗಾಡಿ	आपकी खरीदारी कार्ट
+Price:	ಬೆಲೆ:	मूल्य:
+Quantity:	ಪ್ರಮಾಣ:	मात्रा:
+Update	ನವೀಕರಿಸಿ	अपडेट करें
+Remove	ತೆಗೆದುಹಾಕಿ	निकालें
+Subtotal:	ಉಪಮೊತ್ತ:	उपমোট:
+Total Amount:	ಒಟ್ಟು ಮೊತ್ತ:	कुल राशि:
+Your cart is empty.	ನಿಮ್ಮ ಗಾಡಿ ಖಾಲಿಯಾಗಿದೆ.	आपकी कार्ट खाली है।
+
+
+chat.html
+English Text	Kannada (ಕನ್ನಡ)	Hindi (हिन्दी)
+KrishiBot	ಕೃಷಿಬಾಟ್	कृषिबॉट
+🌐 Language:	🌐 ಭಾಷೆ:	🌐 भाषा:
+English	ಇಂಗ್ಲಿಷ್	अंग्रेज़ी
+Hindi	ಹಿಂದಿ	हिन्दी
+Tamil	ತಮಿಳು	तमिल
+Kannada	ಕನ್ನಡ	कन्नड़
+Telugu	ತೆಲುಗು	तेलुगु
+Ask something about farming...	ಕೃಷಿಯ ಬಗ್ಗೆ ಏನಾದರೂ ಕೇಳಿ...	खेती के बारे में कुछ पूछें...
+Send	ಕಳುಹಿಸು	भेजें
+🤖 KrishiBot is thinking...	🤖 ಕೃಷಿಬಾಟ್ ಯೋಚಿಸುತ್ತಿದೆ...	🤖 कृषिबॉट सोच रहा है...
+❗ Server error. Please try again later.	❗ ಸರ್ವರ್ ದೋಷ. ದಯವಿಟ್ಟು ನಂತರ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.	❗ सर्वर त्रुटि। कृपया बाद में पुनः प्रयास करें।
+👋 Hello! How can I assist you with your farming inquiries?	👋 ನಮಸ್ಕಾರ! ನಿಮ್ಮ ಕೃಷಿ ವಿಚಾರಣೆಗಳಿಗೆ ನಾನು ಹೇಗೆ ಸಹಾಯ ಮಾಡಬಹುದು?	👋 नमस्ते! मैं आपकी खेती संबंधी पूछताछ में कैसे सहायता कर सकता हूँ?
+
+
+edit.html
+English Text	Kannada (ಕನ್ನಡ)	Hindi (हिन्दी)
+Edit	ಸಂಪಾದಿಸು	संपादित करें
+Edit Farmer Details	ರೈತರ ವಿವರಗಳನ್ನು ಸಂಪಾದಿಸಿ	किसान विवरण संपादित करें
+Farmer Name	ರೈತರ ಹೆಸರು	किसान का नाम
+Adhar Number	ಆಧಾರ್ ಸಂಖ್ಯೆ	आधार नंबर
+Age	ವಯಸ್ಸು	आयु
+Gender	ಲಿಂಗ	लिंग
+Male	ಪುರುಷ	पुरुष
+Female	ಸ್ತ್ರೀ	महिला
+Phone Number	ದೂರವಾಣಿ ಸಂಖ್ಯೆ	फ़ोन नंबर
+Address	ವಿಳಾಸ	पता
+Farming Type	ಕೃಷಿ ವಿಧಾನ	खेती का प्रकार
+Submit Record	ದಾಖಲೆಯನ್ನು ಸಲ್ಲಿಸಿ	रिकॉर्ड जमा करें
+
+
+
+equipment_description.html
+English Text	Kannada (ಕನ್ನಡ)	Hindi (हिन्दी)
+Equipment Description	ಸಲಕರಣೆಯ ವಿವರಣೆ	उपकरण विवरण
+Category:	ವರ್ಗ:	श्रेणी:
+Brand:	ಬ್ರ್ಯಾಂಡ್:	ब्रांड:
+Rental Price:	ಬಾಡಿಗೆ ಬೆಲೆ:	किराया मूल्य:
+Total Available:	ಒಟ್ಟು ಲಭ್ಯವಿರುವ ಸಂಖ್ಯೆ:	कुल उपलब्ध:
+Currently Available:	ಪ್ರಸ್ತುತ ಲಭ್ಯವಿರುವ ಸಂಖ್ಯೆ:	वर्तमान में उपलब्ध:
+Add to Cart	ಕಾರ್ಟ್‌ಗೆ ಸೇರಿಸಿ	कार्ट में डालें
+Back to Equipment	ಸಲಕರಣೆಗಳಿಗೆ ಹಿಂತಿರುಗಿ	उपकरण पर वापस जाएँ
+
+
+equipment.html
+
+English Text	Kannada (ಕನ್ನಡ)	Hindi (हिन्दी)
+Equipment Rental	ಸಲಕರಣೆ ಬಾಡಿಗೆ	उपकरण किराया
+Categories	ವರ್ಗಗಳು	श्रेणियाँ
+All Categories	ಎಲ್ಲಾ ವರ್ಗಗಳು	सभी श्रेणियाँ
+Brands	ಬ್ರ್ಯಾಂಡ್‌ಗಳು	ब्रांड्स
+All Brands	ಎಲ್ಲಾ ಬ್ರ್ಯಾಂಡ್‌ಗಳು	सभी ब्रांड्स
+Available Equipment	ಲಭ್ಯವಿರುವ ಸಲಕರಣೆಗಳು	उपलब्ध उपकरण
+Price:	ಬೆಲೆ:	मूल्य:
+Available:	ಲಭ್ಯವಿದೆ:	उपलब्ध:
+Add to Cart	ಕಾರ್ಟ್‌ಗೆ ಸೇರಿಸಿ	कार्ट में डालें
+Description	ವಿವರಣೆ	विवरण
+
+
+farmer.html
+English Text	Kannada (ಕನ್ನಡ)	Hindi (हिन्दी)
+Register Farmers Details	ರೈತರ ವಿವರಗಳನ್ನು ನೋಂದಾಯಿಸಿ	किसान विवरण पंजीकृत करें
+Farmer Name	ರೈತರ ಹೆಸರು	किसान का नाम
+Adhar Number	ಆಧಾರ್ ಸಂಖ್ಯೆ	आधार नंबर
+Age	ವಯಸ್ಸು	आयु
+Gender	ಲಿಂಗ	लिंग
+Select Gender	ಲಿಂಗವನ್ನು ಆಯ್ಕೆ ಮಾಡಿ	लिंग का चयन करें
+Male	ಪುರುಷ	पुरुष
+Female	ಸ್ತ್ರೀ	महिला
+Phone Number	ದೂರವಾಣಿ ಸಂಖ್ಯೆ	फ़ोन नंबर
+Address	ವಿಳಾಸ	पता
+Farming Type	ಕೃಷಿ ವಿಧಾನ	खेती का प्रकार
+Select Farming	ಕೃಷಿಯನ್ನು ಆಯ್ಕೆ ಮಾಡಿ	खेती का चयन करें
+Save Records	ದಾಖಲೆಗಳನ್ನು ಉಳಿಸಿ	रिकॉर्ड सहेजें
+
+
+farmerdetails.html
+English Text	Kannada (ಕನ್ನಡ)	Hindi (हिन्दी)
+Farmer Details	ರೈತರ ವಿವರಗಳು	किसान विवरण
+RID	RID	RID
+FARMER NAME	ರೈತರ ಹೆಸರು	किसान का नाम
+ADHAR NUMBER	ಆಧಾರ್ ಸಂಖ್ಯೆ	आधार नंबर
+AGE	ವಯಸ್ಸು	आयु
+GENDER	ಲಿಂಗ	लिंग
+PHONE NUMBER	ದೂರವಾಣಿ ಸಂಖ್ಯೆ	फ़ोन नंबर
+ADDRESS	ವಿಳಾಸ	पता
+FARMING	ಕೃಷಿ	खेती
+DELETE	ಅಳಿಸಿ	हटाएं
+ADD AGRO PRODUCT	ಕೃಷಿ ಉತ್ಪನ್ನ ಸೇರಿಸಿ	कृषि उत्पाद जोड़ें
+Delete	ಅಳಿಸಿ	हटाएं
+ADD	ಸೇರಿಸಿ	जोड़ें
+Are you sure to Delete data	ಡೇಟಾವನ್ನು ಅಳಿಸಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸಿದ್ದೀರಾ?	क्या आप वाकई डेटा हटाना चाहते हैं?
+
+
+farming.html
+English Text	Kannada (ಕನ್ನಡ)	Hindi (हिन्दी)
+Add Farming	ಕೃಷಿ ಸೇರಿಸಿ	खेती जोड़ें
+Enter Farming Type	ಕೃಷಿ ಪ್ರಕಾರವನ್ನು ನಮೂದಿಸಿ	खेती का प्रकार दर्ज करें
+Add Farming	ಕೃಷಿ ಸೇರಿಸಿ	खेती जोड़ें
+
+
+govschems.html
+
+English Text	Kannada (ಕನ್ನಡ)	Hindi (हिन्दी)
+Government Schemes for Farmers	ರೈತರಿಗಾಗಿ ಸರ್ಕಾರಿ ಯೋಜನೆಗಳು	किसानों के लिए सरकारी योजनाएँ
+Major Government Schemes for Farmers	ರೈತರಿಗಾಗಿ ಪ್ರಮುಖ ಸರ್ಕಾರಿ ಯೋಜನೆಗಳು	किसानों के लिए प्रमुख सरकारी योजनाएँ
+e-NAM (National Agricultural Market)	ಇ-ನ್ಯಾಮ್ (ರಾಷ್ಟ್ರೀಯ ಕೃಷಿ ಮಾರುಕಟ್ಟೆ)	ई-एनएएम (राष्ट्रीय कृषि बाजार)
+A unified online market for agricultural commodities.	ಕೃಷಿ ಸರಕುಗಳಿಗಾಗಿ ಒಂದುಗೂಡಿದ ಆನ್‌ಲೈನ್ ಮಾರುಕಟ್ಟೆ.	कृषि वस्तुओं के लिए एक एकीकृत ऑनलाइन बाजार।
+Connects 1000+ APMC mandis nationwide	ರಾಷ್ಟ್ರವ್ಯಾಪಿ 1000+ ಎಪಿಎಂಸಿ ಮಂಡಿಗಳನ್ನು ಸಂಪರ್ಕಿಸುತ್ತದೆ.	राष्ट्रव्यापी 1000+ एपीएमसी मंडियों को जोड़ता है।
+Offers better price discovery for farmers	ರೈತರಿಗೆ ಉತ್ತಮ ಬೆಲೆ ಅನ್ವೇಷಣೆಯನ್ನು ನೀಡುತ್ತದೆ.	किसानों के लिए बेहतर मूल्य खोज प्रदान करता है।
+Reduces middlemen and promotes direct selling	ಮಧ್ಯವರ್ತಿಗಳನ್ನು ಕಡಿಮೆ ಮಾಡುತ್ತದೆ ಮತ್ತು ನೇರ ಮಾರಾಟವನ್ನು ಉತ್ತೇಜಿಸುತ್ತದೆ.	बिचौलियों को कम करता है और प्रत्यक्ष बिक्री को बढ़ावा देता है।
+Real-time trading and mobile app support	ರಿಯಲ್-ಟೈಮ್ ಟ್ರೇಡಿಂಗ್ ಮತ್ತು ಮೊಬೈಲ್ ಅಪ್ಲಿಕೇಶನ್ ಬೆಂಬಲ.	वास्तविक समय व्यापार और मोबाइल ऐप समर्थन।
+Explore More	ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ	और जानें
+Agriculture Infrastructure Fund	ಕೃಷಿ ಮೂಲಸೌಕರ್ಯ ನಿಧಿ	कृषि अवसंरचना कोष
+Provides medium-long term loans for post-harvest infrastructure.	ಕೊಯ್ಲೋತ್ತರ ಮೂಲಸೌಕರ್ಯಕ್ಕಾಗಿ ಮಧ್ಯಮ-ದೀರ್ಘಾವಧಿ ಸಾಲಗಳನ್ನು ಒದಗಿಸುತ್ತದೆ.	फसल कटाई के बाद के बुनियादी ढांचे के लिए मध्यम-दीर्घकालिक ऋण प्रदान करता है।
+Interest subvention of 3% per annum	ವಾರ್ಷಿಕ 3% ಬಡ್ಡಿ ಸಹಾಯಧನ.	प्रति वर्ष 3% ब्याज छूट।
+Credit guarantee coverage for eligible borrowers	ಅರ್ಹ ಸಾಲಗಾರರಿಗೆ ಸಾಲ ಖಾತರಿ ರಕ್ಷಣೆ.	पात्र उधारकर्ताओं के लिए क्रेडिट गारंटी कवरेज।
+Supports cold storage, silos, warehouses, etc.	ಶೀತಲೀಕರಣ ಘಟಕಗಳು, ಸಿಲೋಗಳು, ಗೋದಾಮುಗಳು ಇತ್ಯಾದಿಗಳನ್ನು ಬೆಂಬಲಿಸುತ್ತದೆ.	कोल्ड स्टोरेज, साइलो, गोदाम आदि का समर्थन करता है।
+Tenure: Up to 7 years for loan repayment	ಅವಧಿ: ಸಾಲ ಮರುಪಾವತಿಗೆ 7 ವರ್ಷಗಳವರೆಗೆ.	कार्यकाल: ऋण चुकौती के लिए 7 वर्ष तक।
+PM Fasal Bima Yojana (PMFBY)	ಪಿಎಂ ಫಸಲ್ ಬಿಮಾ ಯೋಜನೆ (ಪಿಎಂಎಫ್‌ಬಿವೈ)	पीएम फसल बीमा योजना (पीएमएफबीवाई)
+A comprehensive crop insurance scheme for farmers.	ರೈತರಿಗಾಗಿ ಸಮಗ್ರ ಬೆಳೆ ವಿಮಾ ಯೋಜನೆ.	किसानों के लिए एक व्यापक फसल बीमा योजना।
+2% premium for Kharif, 1.5% for Rabi crops	ಖಾರಿಫ್‌ಗೆ 2%, ರಬಿ ಬೆಳೆಗಳಿಗೆ 1.5% ಪ್ರೀಮಿಯಂ.	खरीफ के लिए 2%, रबी फसलों के लिए 1.5% प्रीमियम।
+100% claim coverage in case of crop loss	ಬೆಳೆ ನಷ್ಟದ ಸಂದರ್ಭದಲ್ಲಿ 100% ಕ್ಲೈಮ್ ಕವರೇಜ್.	फसल नुकसान के मामले में 100% दावा कवरेज।
+Satellite and drone-based crop monitoring	ಉಪಗ್ರಹ ಮತ್ತು ಡ್ರೋನ್ ಆಧಾರಿತ ಬೆಳೆ ಮೇಲ್ವಿಚಾರಣೆ.	सैटेलाइट और ड्रोन आधारित फसल निगरानी।
+Mandatory for loanee farmers	ಸಾಲ ಪಡೆದ ರೈತರಿಗೆ ಕಡ್ಡಾಯ.	कर्जदार किसानों के लिए अनिवार्य।
+PM Kisan Maan Dhan Yojana	ಪಿಎಂ ಕಿಸಾನ್ ಮಾನ್ ಧನ್ ಯೋಜನೆ	पीएम किसान मान धन योजना
+A voluntary pension scheme for small and marginal farmers.	ಸಣ್ಣ ಮತ್ತು ಅತಿ ಸಣ್ಣ ರೈತರಿಗಾಗಿ ಸ್ವಯಂಪ್ರೇರಿತ ಪಿಂಚಣಿ ಯೋಜನೆ.	छोटे और सीमांत किसानों के लिए एक स्वैच्छिक पेंशन योजना।
+₹3,000 monthly pension after age 60	60 ವರ್ಷ ವಯಸ್ಸಿನ ನಂತರ ₹3,000 ಮಾಸಿಕ ಪಿಂಚಣಿ.	60 वर्ष की आयु के बाद ₹3,000 मासिक पेंशन।
+Contribution starts from ₹55/month (age 18)	ಕೊಡುಗೆ ₹55/ತಿಂಗಳಿಗೆ (18 ವರ್ಷ ವಯಸ್ಸಿನಿಂದ) ಪ್ರಾರಂಭವಾಗುತ್ತದೆ.	योगदान ₹55/माह (18 वर्ष की आयु से) से शुरू होता है।
+Government matches the farmer’s contribution	ಸರ್ಕಾರವು ರೈತರ ಕೊಡುಗೆಗೆ ಸಮಾನವಾದ ಮೊತ್ತವನ್ನು ನೀಡುತ್ತದೆ.	सरकार किसान के योगदान के बराबर राशि का योगदान करती है।
+Beneficiaries covered under LIC pension plan	ಫಲಾನುಭವಿಗಳು ಎಲ್‌ಐಸಿ ಪಿಂಚಣಿ ಯೋಜನೆಯಡಿ ಒಳಗೊಂಡಿರುತ್ತಾರೆ.	लाभार्थी एलआईसी पेंशन योजना के तहत कवर किए जाते हैं।
+PM Kisan Samman Nidhi (PM-KISAN)	ಪಿಎಂ ಕಿಸಾನ್ ಸಮ್ಮಾನ್ ನಿಧಿ (ಪಿಎಂ-ಕಿಸಾನ್)	पीएम किसान सम्मान निधि (पीएम-किसान)
+Income support of ₹6,000/year for landholding farmers.	ಭೂಮಿ ಹೊಂದಿರುವ ರೈತರಿಗೆ ವಾರ್ಷಿಕ ₹6,000 ಆದಾಯ ಬೆಂಬಲ.	भूमिधारी किसानों के लिए ₹6,000/वर्ष की आय सहायता।
+Paid in 3 equal installments of ₹2,000	₹2,000 ದರದಲ್ಲಿ 3 ಸಮಾನ ಕಂತುಗಳಲ್ಲಿ ಪಾವತಿಸಲಾಗುತ್ತದೆ.	₹2,000 की 3 समान किस्तों में भुगतान किया जाता है।
+Transferred directly to bank accounts	ನೇರವಾಗಿ ಬ್ಯಾಂಕ್ ಖಾತೆಗಳಿಗೆ ವರ್ಗಾಯಿಸಲಾಗುತ್ತದೆ.	सीधे बैंक खातों में स्थानांतरित किया जाता है।
+Simple Aadhaar-based registration	ಸರಳ ಆಧಾರ್ ಆಧಾರಿತ ನೋಂದಣಿ.	सरल आधार आधारित पंजीकरण।
+Open to all farmers (except institutional landowners)	ಎಲ್ಲಾ ರೈತರಿಗೂ ಮುಕ್ತ (ಸಂಸ್ಥಾಗತ ಭೂಮಾಲೀಕರನ್ನು ಹೊರತುಪಡಿಸಿ).	सभी किसानों के लिए खुला (संस्थागत भूस्वामियों को छोड़कर)।
+PM Krishi Sinchai Yojana (PMKSY)	ಪಿಎಂ ಕೃಷಿ ಸಿಂಚಾಯಿ ಯೋಜನೆ (ಪಿಎಂಕೆಎಸ್‌ವೈ)	पीएम कृषि सिंचाई योजना (पीएमकेएसवाई)
+Promotes efficient water use in agriculture.	ಕೃಷಿಯಲ್ಲಿ ಸಮರ್ಥ ನೀರಿನ ಬಳಕೆಯನ್ನು ಉತ್ತೇಜಿಸುತ್ತದೆ.	कृषि में कुशल जल उपयोग को बढ़ावा देता है।
+Focus on micro-irrigation (drip/sprinkler)	ಸೂಕ್ಷ್ಮ ನೀರಾವರಿ (ಹನಿ/ತುಂತುರು) ಮೇಲೆ ಗಮನ.	सूक्ष्म सिंचाई (ड्रिप/स्प्रिंकलर) पर ध्यान केंद्रित करता है।
+Enhances farm-level water use efficiency	ಕೃಷಿ ಮಟ್ಟದ ನೀರಿನ ಬಳಕೆಯ ದಕ್ಷತೆಯನ್ನು ಹೆಚ್ಚಿಸುತ್ತದೆ.	खेत स्तर पर जल उपयोग दक्षता बढ़ाता है।
+Supports watershed management	ಜಲಾನಯನ ನಿರ್ವಹಣೆಯನ್ನು ಬೆಂಬಲಿಸುತ್ತದೆ.	वाटरशेड प्रबंधन का समर्थन करता है।
+Subsidy available for installing irrigation systems	ನೀರಾವರಿ ವ್ಯವಸ್ಥೆಗಳನ್ನು ಸ್ಥಾಪಿಸಲು ಸಹಾಯಧನ ಲಭ್ಯವಿದೆ.	सिंचाई प्रणाली स्थापित करने के लिए सब्सिडी उपलब्ध है।
+Soil Health Card Scheme	ಮಣ್ಣಿನ ಆರೋಗ್ಯ ಚೀಟಿ ಯೋಜನೆ	मृदा स्वास्थ्य कार्ड योजना
+Provides detailed soil reports to farmers.	ರೈತರಿಗೆ ವಿವರವಾದ ಮಣ್ಣಿನ ವರದಿಗಳನ್ನು ಒದಗಿಸುತ್ತದೆ.	किसानों को विस्तृत मिट्टी रिपोर्ट प्रदान करता है।
+Issued every 2 years	ಪ್ರತಿ 2 ವರ್ಷಗಳಿಗೊಮ್ಮೆ ನೀಡಲಾಗುತ್ತದೆ.	हर 2 साल में जारी किया जाता है।
+Includes 12 key nutrient values	12 ಪ್ರಮುಖ ಪೋಷಕಾಂಶಗಳ ಮೌಲ್ಯಗಳನ್ನು ಒಳಗೊಂಡಿದೆ.	12 प्रमुख पोषक तत्वों के मान शामिल हैं।
+Suggests corrective fertilizer usage	ಸರಿಪಡಿಸುವ ರಸಗೊಬ್ಬರ ಬಳಕೆಯನ್ನು ಸೂಚಿಸುತ್ತದೆ.	सुधारात्मक उर्वरक उपयोग का सुझाव देता है।
+Improves yield through better soil management	ಉತ್ತಮ ಮಣ್ಣಿನ ನಿರ್ವಹಣೆಯ ಮೂಲಕ ಇಳುವರಿಯನ್ನು ಸುಧಾರಿಸುತ್ತದೆ.	बेहतर मिट्टी प्रबंधन के माध्यम से उपज में सुधार करता है।
+Rashtriya Krishi Vikas Yojana (RKVY)	ರಾಷ್ಟ್ರೀಯ ಕೃಷಿ ವಿಕಾಸ್ ಯೋಜನೆ (ಆರ್‌ಕೆವಿವೈ)	राष्ट्रीय कृषि विकास योजना (आरकेवीवाई)
+A flexible scheme to fund state-level agri-development projects.	ರಾಜ್ಯ ಮಟ್ಟದ ಕೃಷಿ-ಅಭಿವೃದ್ಧಿ ಯೋಜನೆಗಳಿಗೆ ಹಣ ನೀಡಲು ಒಂದು ಹೊಂದಿಕೊಳ್ಳುವ ಯೋಜನೆ.	राज्य स्तर की कृषि-विकास परियोजनाओं को निधि देने के लिए एक लचीली योजना।
+State-specific targets based on need	ಅಗತ್ಯಕ್ಕೆ ಅನುಗುಣವಾಗಿ ರಾಜ್ಯ-ನಿರ್ದಿಷ್ಟ ಗುರಿಗಳು.	आवश्यकता के आधार पर राज्य-विशिष्ट लक्ष्य।
+Focus on technology and research adoption	ತಂತ್ರಜ್ಞಾನ ಮತ್ತು ಸಂಶೋಧನಾ ಅಳವಡಿಕೆಗೆ ಗಮನ.	प्रौद्योगिकी और अनुसंधान अपनाने पर ध्यान केंद्रित करता है।
+Supports organic farming, seeds, irrigation, etc.	ಸಾವಯವ ಕೃಷಿ, ಬೀಜಗಳು, ನೀರಾವರಿ ಇತ್ಯಾದಿಗಳನ್ನು ಬೆಂಬಲಿಸುತ್ತದೆ.	जैविक खेती, बीज, सिंचाई आदि का समर्थन करता है।
+Encourages public-private partnerships in agri-infra	ಕೃಷಿ ಮೂಲಸೌಕರ್ಯದಲ್ಲಿ ಸಾರ್ವಜನಿಕ-ಖಾಸಗಿ ಸಹಭಾಗಿತ್ವವನ್ನು ಉತ್ತೇಜಿಸುತ್ತದೆ.	कृषि अवसंरचना में सार्वजनिक-निजी भागीदारी को प्रोत्साहित करता है।
+National Mission for Sustainable Agriculture (NMSA)	ಸುಸ್ಥಿರ ಕೃಷಿಗಾಗಿ ರಾಷ್ಟ್ರೀಯ ಮಿಷನ್ (ಎನ್‌ಎಂಎಸ್‌ಎ)	सतत कृषि के लिए राष्ट्रीय मिशन (एनएमएसए)
+Promotes sustainable practices in agriculture.	ಕೃಷಿಯಲ್ಲಿ ಸುಸ್ಥಿರ ಪದ್ಧತಿಗಳನ್ನು ಉತ್ತೇಜಿಸುತ್ತದೆ.	कृषि में सतत प्रथाओं को बढ़ावा देता है।
+Focus on climate-resilient farming	ಹವಾಮಾನ-ನಿರೋಧಕ ಕೃಷಿಯ ಮೇಲೆ ಗಮನ.	जलवायु-लचीली खेती पर ध्यान केंद्रित करता है।
+Includes rainwater harvesting and agroforestry	ಮಳೆನೀರು ಕೊಯ್ಲು ಮತ್ತು ಕೃಷಿ ಅರಣ್ಯವನ್ನು ಒಳಗೊಂಡಿದೆ.	वर्षा जल संचयन और कृषि वानिकी शामिल है।
+Promotes Integrated Nutrient Management (INM)	ಸಮಗ್ರ ಪೋಷಕಾಂಶ ನಿರ್ವಹಣೆಯನ್ನು (ಐಎನ್‌ಎಂ) ಉತ್ತೇಜಿಸುತ್ತದೆ.	एकीकृत पोषक तत्व प्रबंधन (आईएनएम) को बढ़ावा देता है।
+Supports organic & traditional farming methods	ಸಾವಯವ ಮತ್ತು ಸಾಂಪ್ರದಾಯಿಕ ಕೃಷಿ ವಿಧಾನಗಳನ್ನು ಬೆಂಬಲಿಸುತ್ತದೆ.	जैविक और पारंपरिक खेती विधियों का समर्थन करता है।
+
+
+index.html
+English Text	Kannada (ಕನ್ನಡ)	Hindi (हिन्दी)
+KrishiJyoti	ಕೃಷಿಜ್ಯೋತಿ	कृषिज्योति
+Developed by	ಅಭಿವೃದ್ಧಿಪಡಿಸಿದವರು	द्वारा विकसित
+Keshav T M	Keshav T M	Keshav T M
+
+
+login.html
+English Text	Kannada (ಕನ್ನಡ)	Hindi (हिन्दी)
+Login	ಲಾಗಿನ್	लॉग इन
+Email address	ಇಮೇಲ್ ವಿಳಾಸ	ईमेल पता
+Enter your registered email address.	ನಿಮ್ಮ ನೋಂದಾಯಿತ ಇಮೇಲ್ ವಿಳಾಸವನ್ನು ನಮೂದಿಸಿ.	अपना पंजीकृत ईमेल पता दर्ज करें।
+Password	ಪಾಸ್‌ವರ್ಡ್	पासवर्ड
+Login	ಲಾಗಿನ್	लॉग इन
+New User?	ಹೊಸ ಬಳಕೆದಾರರೇ?	नए उपयोगकर्ता?
+Sign Up	ಸೈನ್ ಅಪ್	साइन अप
+Login failed:	ಲಾಗಿನ್ ವಿಫಲವಾಗಿದೆ:	लॉग इन विफल रहा:
+An error occurred during login.	ಲಾಗಿನ್ ಸಮಯದಲ್ಲಿ ದೋಷ ಸಂಭವಿಸಿದೆ.	लॉग इन के दौरान एक त्रुटि हुई।
+Firebase Login failed:	ಫೈರ್‌ಬೇಸ್ ಲಾಗಿನ್ ವಿಫಲವಾಗಿದೆ:	फायरबेस लॉग इन विफल रहा:
+
+
+login1.html
+English Text	Kannada (ಕನ್ನಡ)	Hindi (हिन्दी)
+Worker Login	ಕಾರ್ಮಿಕ ಲಾಗಿನ್	कर्मचारी लॉग इन
+Worker Signup	ಕಾರ್ಮಿಕ ಸೈನ್ ಅಪ್	कर्मचारी साइन अप
+Worker Home	ಕಾರ್ಮಿಕರ ಮುಖಪುಟ	कर्मचारी होम
+Home	ಮುಖಪುಟ	होम
+Username:	ಬಳಕೆದಾರ ಹೆಸರು:	उपयोगकर्ता नाम:
+Password:	ಪಾಸ್‌ವರ್ಡ್:	पासवर्ड:
+Login	ಲಾಗಿನ್	लॉग इन
+Don't have an account?	ಖಾತೆ ಇಲ್ಲವೇ?	क्या खाता नहीं है?
+Sign up here	ಇಲ್ಲಿ ಸೈನ್ ಅಪ್ ಮಾಡಿ	यहाँ साइन अप करें
+© KrishiJyoti - Worker Login	© ಕೃಷಿಜ್ಯೋತಿ - ಕಾರ್ಮಿಕ ಲಾಗಿನ್	© कृषिज्योति - कर्मचारी लॉग इन
+
+
+preone.html
+English Text	Kannada (ಕನ್ನಡ)	Hindi (हिन्दी)
+Crop Recommendation System	ಬೆಳೆ ಶಿಫಾರಸು ವ್ಯವಸ್ಥೆ	फसल सिफारिश प्रणाली
+Nitrogen	ಸಾರಜನಕ	नाइट्रोजन
+Enter Nitrogen	ಸಾರಜನಕವನ್ನು ನಮೂದಿಸಿ	नाइट्रोजन दर्ज करें
+Phosphorus	ರಂಜಕ	फास्फोरस
+Enter Phosphorus	ರಂಜಕವನ್ನು ನಮೂದಿಸಿ	फास्फोरस दर्ज करें
+Potassium	ಪೊಟ್ಯಾಸಿಯಮ್	पोटेशियम
+Enter Potassium	ಪೊಟ್ಯಾಸಿಯಮ್ ಅನ್ನು ನಮೂದಿಸಿ	पोटेशियम दर्ज करें
+Temperature	ತಾಪಮಾನ	तापमान
+Enter Temperature in °C	ಡಿಗ್ರಿ ಸೆಲ್ಸಿಯಸ್‌ನಲ್ಲಿ ತಾಪಮಾನವನ್ನು ನಮೂದಿಸಿ	°C में तापमान दर्ज करें
+Humidity	ಆರ್ದ್ರತೆ	आर्द्रता
+Enter Humidity in %	ಶೇಕಡಾವಾರು ಪ್ರಮಾಣದಲ್ಲಿ ಆರ್ದ್ರತೆಯನ್ನು ನಮೂದಿಸಿ	% में आर्द्रता दर्ज करें
+pH	ಪಿಎಚ್	पीएच
+Enter pH value	ಪಿಎಚ್ ಮೌಲ್ಯವನ್ನು ನಮೂದಿಸಿ	पीएच मान दर्ज करें
+Rainfall	ಮಳೆ	वर्षा
+Enter Rainfall in mm	ಮಿಲಿಮೀಟರ್‌ಗಳಲ್ಲಿ ಮಳೆಯನ್ನು ನಮೂದಿಸಿ	मिमी में वर्षा दर्ज करें
+Get Recommendation	ಶಿಫಾರಸು ಪಡೆಯಿರಿ	सिफारिश प्राप्त करें
+Recommend Crop for Cultivation is:	ಕೃಷಿಗಾಗಿ ಶಿಫಾರಸು ಮಾಡಲಾದ ಬೆಳೆ:	खेती के लिए अनुशंसित फसल है:
+🌱	🌱 (This is an emoji and usually remains the same)	🌱 (यह एक इमोजी है और आमतौर पर समान रहता है)
+
+
+register.html
+
+English Text	Kannada (ಕನ್ನಡ)	Hindi (हिन्दी)
+Farmer Registration	ರೈತರ ನೋಂದಣಿ	किसान पंजीकरण
+Farmer Name	ರೈತರ ಹೆಸರು	किसान का नाम
+Adhar Number	ಆಧಾರ್ ಸಂಖ್ಯೆ	आधार नंबर
+Age	ವಯಸ್ಸು	आयु
+Gender	ಲಿಂಗ	लिंग
+Male	ಪುರುಷ	पुरुष
+Female	ಸ್ತ್ರೀ	महिला
+Other	ಇತರ	अन्य
+Phone Number	ದೂರವಾಣಿ ಸಂಖ್ಯೆ	फ़ोन नंबर
+Address	ವಿಳಾಸ	पता
+Farming Type	ಕೃಷಿ ವಿಧಾನ	खेती का प्रकार
+Register Farmer	ರೈತರನ್ನು ನೋಂದಾಯಿಸಿ	किसान को पंजीकृत करें
+
+
+signup.html
+English Text	Kannada (ಕನ್ನಡ)	Hindi (हिन्दी)
+Signup	ಸೈನ್ ಅಪ್	साइन अप
+Sign Up	ಸೈನ್ ಅಪ್	साइन अप
+UserName	ಬಳಕೆದಾರ ಹೆಸರು	उपयोगकर्ता नाम
+Email address	ಇಮೇಲ್ ವಿಳಾಸ	ईमेल पता
+We'll never share your email with anyone else.	ನಾವು ನಿಮ್ಮ ಇಮೇಲ್ ಅನ್ನು ಬೇರೆಯವರೊಂದಿಗೆ ಹಂಚಿಕೊಳ್ಳುವುದಿಲ್ಲ.	हम कभी भी आपका ईमेल किसी और के साथ साझा नहीं करेंगे।
+Password	ಪಾಸ್‌ವರ್ಡ್	पासवर्ड
+Sign Up (button)	ಸೈನ್ ಅಪ್	साइन अप
+Already User?	ಈಗಾಗಲೇ ಬಳಕೆದಾರರೇ?	पहले से उपयोगकर्ता हैं?
+Login	ಲಾಗಿನ್	लॉग इन
+
+
+signup1.html
+English Text	Kannada (ಕನ್ನಡ)	Hindi (हिन्दी)
+Worker Signup	ಕಾರ್ಮಿಕ ಸೈನ್ ಅಪ್	कर्मचारी साइन अप
+Worker Login	ಕಾರ್ಮಿಕ ಲಾಗಿನ್	कर्मचारी लॉग इन
+Worker Home	ಕಾರ್ಮಿಕರ ಮುಖಪುಟ	कर्मचारी होम
+Home	ಮುಖಪುಟ	होम
+Username:	ಬಳಕೆದಾರ ಹೆಸರು:	उपयोगकर्ता नाम:
+Email:	ಇಮೇಲ್:	ईमेल:
+Password:	ಪಾಸ್‌ವರ್ಡ್:	पासवर्ड:
+Confirm Password:	ಪಾಸ್‌ವರ್ಡ್ ಖಚಿತಪಡಿಸಿ:	पासवर्ड की पुष्टि करें:
+Sign Up (button)	ಸೈನ್ ಅಪ್ ಮಾಡಿ	साइन अप करें
+Already have an account?	ಈಗಾಗಲೇ ಖಾತೆ ಇದೆಯೇ?	क्या पहले से खाता है?
+Log in here	ಇಲ್ಲಿ ಲಾಗಿನ್ ಮಾಡಿ	यहाँ लॉग इन करें
+© KrishiJyoti - Keshav T M	© ಕೃಷಿಜ್ಯೋತಿ - ಕೇಶವ್ ಟಿ ಎಂ	© कृषिज्योति - केशव टी एम
+
+
+transport.html
+English Text	Kannada (ಕನ್ನಡ)	Hindi (हिन्दी)
+Transport Resources for Farmers	ರೈತರಿಗೆ ಸಾರಿಗೆ ಸಂಪನ್ಮೂಲಗಳು	किसानों के लिए परिवहन संसाधन
+🔰 Government Initiatives & Subsidies	🔰 ಸರ್ಕಾರಿ ಉಪಕ್ರಮಗಳು ಮತ್ತು ಸಹಾಯಧನಗಳು	🔰 सरकारी पहलें और सब्सिडी
+Subsidies on cold storage and transportation under the PM Kisan SAMPADA Yojana.	ಪಿಎಂ ಕಿಸಾನ್ ಸಂಪದ ಯೋಜನೆಯಡಿ ಶೀತಲೀಕರಣ ಘಟಕ ಮತ್ತು ಸಾಗಣೆಗೆ ಸಹಾಯಧನ.	पीएम किसान संपदा योजना के तहत कोल्ड स्टोरेज और परिवहन पर सब्सिडी।
+Assistance from NABARD for rural road and transport development.	ಗ್ರಾಮೀಣ ರಸ್ತೆ ಮತ್ತು ಸಾರಿಗೆ ಅಭಿವೃದ್ಧಿಗಾಗಿ ನಬಾರ್ಡ್‌ನಿಂದ ಸಹಾಯ.	ग्रामीण सड़क और परिवहन विकास के लिए नाबार्ड से सहायता।
+Agri-logistics grants for FPOs (Farmer Producer Organizations).	ಎಫ್‌ಪಿಒಗಳಿಗೆ (ರೈತ ಉತ್ಪಾದಕ ಸಂಸ್ಥೆಗಳು) ಕೃಷಿ-ಸಾಗಣೆ ಅನುದಾನ.	एफपीओ (किसान उत्पादक संगठनों) के लिए कृषि-लॉजिस्टिक्स अनुदान।
+🚛 Logistics & Transport Services	🚛 ಲಾಜಿಸ್ಟಿಕ್ಸ್ ಮತ್ತು ಸಾರಿಗೆ ಸೇವೆಗಳು	🚛 लॉजिस्टिक्स और परिवहन सेवाएं
+Porter Goods Transport	ಪೋರ್ಟರ್ ಸರಕು ಸಾಗಣೆ	पोर्टर सामान परिवहन
+On-demand transport booking for agriculture produce.	ಕೃಷಿ ಉತ್ಪನ್ನಗಳಿಗಾಗಿ ಬೇಡಿಕೆಯ ಮೇರೆಗೆ ಸಾರಿಗೆ ಬುಕಿಂಗ್.	कृषि उपज के लिए ऑन-डिमांड परिवहन बुकिंग।
+Visit Porter	ಪೋರ್ಟರ್‌ಗೆ ಭೇಟಿ ನೀಡಿ	पोर्टर पर जाएँ
+Rivigo - Logistics for Farmers	ರಿವಿಗೋ - ರೈತರಿಗಾಗಿ ಲಾಜಿಸ್ಟಿಕ್ಸ್	रिविगो - किसानों के लिए लॉजिस्टिक्स
+Offers fast, reliable delivery with cold-chain support.	ಶೀತಲೀಕರಣ ಸರಪಳಿ ಬೆಂಬಲದೊಂದಿಗೆ ವೇಗದ, ವಿಶ್ವಾಸಾರ್ಹ ವಿತರಣೆಯನ್ನು ನೀಡುತ್ತದೆ.	कोल्ड-चेन सपोर्ट के साथ तेज़, विश्वसनीय डिलीवरी प्रदान करता है।
+Visit Rivigo	ರಿವಿಗೋಗೆ ಭೇಟಿ ನೀಡಿ	रिविगो पर जाएँ
+Agricultural Transport via Indian Railways	ಭಾರತೀಯ ರೈಲ್ವೆಯ ಮೂಲಕ ಕೃಷಿ ಸಾರಿಗೆ	भारतीय रेलवे के माध्यम से कृषि परिवहन
+Special schemes for transportation of produce via Kisan Rails.	ಕಿಸಾನ್ ರೈಲುಗಳ ಮೂಲಕ ಉತ್ಪನ್ನಗಳ ಸಾಗಣೆಗಾಗಿ ವಿಶೇಷ ಯೋಜನೆಗಳು.	किसान रेलों के माध्यम से उपज के परिवहन के लिए विशेष योजनाएं।
+Visit Indian Railways	ಭಾರತೀಯ ರೈಲ್ವೆಗೆ ಭೇಟಿ ನೀಡಿ	भारतीय रेलवे पर जाएँ
+🛵 Local & Affordable Delivery Options (Ideal for ₹500 - ₹2000 Deliveries)	🛵 ಸ್ಥಳೀಯ ಮತ್ತು ಕೈಗೆಟುಕುವ ವಿತರಣಾ ಆಯ್ಕೆಗಳು (₹500 - ₹2000 ವಿತರಣೆಗಳಿಗೆ ಸೂಕ್ತ)	🛵 स्थानीय और किफायती डिलीवरी विकल्प (₹500 - ₹2000 डिलीवरी के लिए आदर्श)
+Dunzo (Small Parcel Delivery)	ಡಂಜೊ (ಸಣ್ಣ ಪಾರ್ಸೆಲ್ ವಿತರಣೆ)	डंज़ो (छोटा पार्सल डिलीवरी)
+Ideal for intra-city deliveries of farm produce, seeds, tools, or fertilizers.	ಕೃಷಿ ಉತ್ಪನ್ನಗಳು, ಬೀಜಗಳು, ಉಪಕರಣಗಳು ಅಥವಾ ರಸಗೊಬ್ಬರಗಳ ನಗರದೊಳಗಿನ ವಿತರಣೆಗೆ ಸೂಕ್ತ.	कृषि उपज, बीज, उपकरण या उर्वरकों की शहर के भीतर डिलीवरी के लिए आदर्श।
+Pickup by bike within 60 minutes.	60 ನಿಮಿಷಗಳಲ್ಲಿ ಬೈಕ್ ಮೂಲಕ ಪಿಕಪ್.	60 मिनट के भीतर बाइक द्वारा पिकअप।
+Visit Dunzo	ಡಂಜೊಗೆ ಭೇಟಿ ನೀಡಿ	डंज़ो पर जाएँ
+Uber Connect	ಉಬರ್ ಕನೆಕ್ಟ್	उबर कनेक्ट
+Affordable courier and parcel delivery using Uber drivers.	ಉಬರ್ ಚಾಲಕರನ್ನು ಬಳಸಿ ಕೈಗೆಟುಕುವ ಕೊರಿಯರ್ ಮತ್ತು ಪಾರ್ಸೆಲ್ ವಿತರಣೆ.	उबर ड्राइवरों का उपयोग करके किफायती कूरियर और पार्सल डिलीवरी।
+Works via Uber app and available in most cities.	ಉಬರ್ ಅಪ್ಲಿಕೇಶನ್ ಮೂಲಕ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆ ಮತ್ತು ಹೆಚ್ಚಿನ ನಗರಗಳಲ್ಲಿ ಲಭ್ಯವಿದೆ.	उबर ऐप के माध्यम से काम करता है और अधिकांश शहरों में उपलब्ध है।
+Visit Uber Connect	ಉಬರ್ ಕನೆಕ್ಟ್‌ಗೆ ಭೇಟಿ ನೀಡಿ	उबर कनेक्ट पर जाएँ
+WeFast / Borzo	ವಿಫಾಸ್ಟ್ / ಬೊರ್ಜೊ	वीफ़ास्ट / बोर्ज़ो
+Ultra-fast courier service using scooters, great for seeds, tools, and small packages.	ಸ್ಕೂಟರ್‌ಗಳನ್ನು ಬಳಸಿಕೊಂಡು ಅತಿ ವೇಗದ ಕೊರಿಯರ್ ಸೇವೆ, ಬೀಜಗಳು, ಉಪಕರಣಗಳು ಮತ್ತು ಸಣ್ಣ ಪ್ಯಾಕೇಜ್‌ಗಳಿಗೆ ಉತ್ತಮ.	स्कूटरों का उपयोग करके अल्ट्रा-फास्ट कूरियर सेवा, बीज, उपकरण और छोटे पैकेज के लिए बढ़िया।
+Supports same-day delivery across towns.	ಪಟ್ಟಣಗಳಾದ್ಯಂತ ಅದೇ ದಿನದ ವಿತರಣೆಯನ್ನು ಬೆಂಬಲಿಸುತ್ತದೆ.	कस्बों में उसी दिन डिलीवरी का समर्थन करता है।
+Visit Borzo	ಬೊರ್ಜೊಗೆ ಭೇಟಿ ನೀಡಿ	बोर्ज़ो पर जाएँ
+Local Courier Aggregators (JustDial Recommendations)	ಸ್ಥಳೀಯ ಕೊರಿಯರ್ ಸಂಗ್ರಾಹಕರು (ಜಸ್ಟ್‌ಡಯಲ್ ಶಿಫಾರಸುಗಳು)	स्थानीय कूरियर एग्रीगेटर (जस्टडायल सिफारिशें)
+Find small-scale courier services around your village or district.	ನಿಮ್ಮ ಗ್ರಾಮ ಅಥವಾ ಜಿಲ್ಲೆಯ ಸುತ್ತಮುತ್ತಲಿನ ಸಣ್ಣ ಪ್ರಮಾಣದ ಕೊರಿಯರ್ ಸೇವೆಗಳನ್ನು ಹುಡುಕಿ.	अपने गाँव या जिले के आसपास छोटे पैमाने की कूरियर सेवाएं खोजें।
+Search on JustDial	ಜಸ್ಟ್‌ಡಯಲ್‌ನಲ್ಲಿ ಹುಡುಕಿ	जस्टडायल पर खोजें
+❄️ Cold Chain & Storage Support	❄️ ಶೀತಲೀಕರಣ ಸರಪಳಿ ಮತ್ತು ಶೇಖರಣಾ ಬೆಂಬಲ	❄️ कोल्ड चेन और स्टोरेज सपोर्ट
+Integrated Cold Chain Scheme – support for refrigerated vans and storage.	ಸಮಗ್ರ ಶೀತಲೀಕರಣ ಸರಪಳಿ ಯೋಜನೆ - ಶೈತ್ಯೀಕರಿಸಿದ ವ್ಯಾನ್‌ಗಳು ಮತ್ತು ಶೇಖರಣೆಗೆ ಬೆಂಬಲ.	एकीकृत कोल्ड चेन योजना - रेफ्रिजरेटेड वैन और स्टोरेज के लिए समर्थन।
+Agro-Logistics platforms offering real-time monitoring.	ನೈಜ-ಸಮಯದ ಮೇಲ್ವಿಚಾರಣೆಯನ್ನು ನೀಡುವ ಕೃಷಿ-ಸಾಗಣೆ ವೇದಿಕೆಗಳು.	वास्तविक समय की निगरानी की पेशकश करने वाले कृषि-लॉजिस्टिक्स प्लेटफॉर्म।
+Subsidy on solar-powered cold rooms for remote areas.	ದೂರದ ಪ್ರದೇಶಗಳಿಗೆ ಸೌರಶಕ್ತಿ ಚಾಲಿತ ಶೀತಲೀಕರಣ ಕೊಠಡಿಗಳ ಮೇಲೆ ಸಹಾಯಧನ.	दूरदराज के क्षेत्रों के लिए सौर ऊर्जा से चलने वाले कोल्ड रूम पर सब्सिडी।
+🧰 Useful Tools & Helplines	🧰 ಉಪಯುಕ್ತ ಪರಿಕರಗಳು ಮತ್ತು ಸಹಾಯವಾಣಿಗಳು	🧰 उपयोगी उपकरण और हेल्पलाइन
+Kisan Call Center: Dial 1800-180-1551 for transport-related help.	ಕಿಸಾನ್ ಕಾಲ್ ಸೆಂಟರ್: ಸಾರಿಗೆ ಸಂಬಂಧಿತ ಸಹಾಯಕ್ಕಾಗಿ 1800-180-1551 ಗೆ ಕರೆ ಮಾಡಿ.	किसान कॉल सेंटर: परिवहन संबंधी सहायता के लिए 1800-180-1551 डायल करें।
+eNAM: Offers price discovery and trade logistics integration.	ಇ-ನ್ಯಾಮ್: ಬೆಲೆ ಅನ್ವೇಷಣೆ ಮತ್ತು ವ್ಯಾಪಾರ ಲಾಜಿಸ್ಟಿಕ್ಸ್ ಏಕೀಕರಣವನ್ನು ನೀಡುತ್ತದೆ.	ई-एनएएम: मूल्य खोज और व्यापार लॉजिस्टिक्स एकीकरण प्रदान करता है।
+Visit eNAM	ಇ-ನ್ಯಾಮ್‌ಗೆ ಭೇಟಿ ನೀಡಿ	ई-एनएएम पर जाएँ
+GeM (Govt. e-Marketplace): For procurement of transport vehicles and services.	ಜೆಇಎಂ (ಸರ್ಕಾರಿ ಇ-ಮಾರುಕಟ್ಟೆ): ಸಾರಿಗೆ ವಾಹನಗಳು ಮತ್ತು ಸೇವೆಗಳ ಸಂಗ್ರಹಣೆಗಾಗಿ.	जीईएम (सरकारी ई-मार्केटप्लेस): परिवहन वाहनों और सेवाओं की खरीद के लिए।
+Visit GeM	ಜೆಇಎಂಗೆ ಭೇಟಿ ನೀಡಿ	जीईएम पर जाएँ
+
+
+worker.html
+English Text	Kannada (ಕನ್ನಡ)	Hindi (हिन्दी)
+Farm Workers - KrishiJyoti	ಕೃಷಿ ಕಾರ್ಮಿಕರು - ಕೃಷಿಜ್ಯೋತಿ	कृषि श्रमिक - कृषिज्योति
+KrishiJyoti	ಕೃಷಿಜ್ಯೋತಿ	कृषिज्योति
+Sign Up	ಸೈನ್ ಅಪ್	साइन अप
+Login	ಲಾಗಿನ್	लॉग इन
+Expertise:	ಪರಿಣತಿ:	विशेषज्ञता:
+Experience:	ಅನುಭವ:	अनुभव:
+Price per day:	ದಿನಕ್ಕೆ ಬೆಲೆ:	प्रति दिन मूल्य:
+Availability:	ಲಭ್ಯತೆ:	उपलब्धता:
+Contact:	ಸಂಪರ್ಕ:	संपर्क:
+Available	ಲಭ್ಯವಿದೆ	उपलब्ध
+Unavailable	ಲಭ್ಯವಿಲ್ಲ	अनुपलब्ध
+No farm workers have registered yet.	ಯಾವುದೇ ಕೃಷಿ ಕಾರ್ಮಿಕರು ಇನ್ನೂ ನೋಂದಾಯಿಸಿಲ್ಲ.	अभी तक कोई कृषि श्रमिक पंजीकृत नहीं हुआ है।
+© Copyright KrishiJyoti. All Rights Reserved	© ಕೃತಿಸ್ವಾಮ್ಯ ಕೃಷಿಜ್ಯೋತಿ. ಎಲ್ಲ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ	© कॉपीराइट कृषिज्योति. सर्वाधिकार सुरक्षित
+Designed by Keshav T M	ವಿನ್ಯಾಸಗೊಳಿಸಿದವರು ಕೇಶವ್ ಟಿ ಎಂ	केशव टी एम द्वारा डिज़ाइन किया गया
+
+
+worker1.html
+English Text	Kannada (ಕನ್ನಡ)	Hindi (हिन्दी)
+Worker Dashboard	ಕಾರ್ಮಿಕರ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್	कर्मचारी डैशबोर्ड
+Logout	ಲಾಗ್ ಔಟ್	लॉग आउट
+Worker Home	ಕಾರ್ಮಿಕರ ಮುಖಪುಟ	कर्मचारी होम
+Home	ಮುಖಪುಟ	होम
+Worker Profile Management	ಕಾರ್ಮಿಕರ ಪ್ರೊಫೈಲ್ ನಿರ್ವಹಣೆ	कर्मचारी प्रोफाइल प्रबंधन
+Edit Your Profile	ನಿಮ್ಮ ಪ್ರೊಫೈಲ್ ಅನ್ನು ಸಂಪಾದಿಸಿ	अपनी प्रोफाइल संपादित करें
+Name:	ಹೆಸರು:	नाम:
+Image URL (Optional):	ಚಿತ್ರ URL (ಐಚ್ಛಿಕ):	छवि URL (वैकल्पिक):
+Experience:	ಅನುಭವ:	अनुभव:
+Work Details:	ಕೆಲಸದ ವಿವರಗಳು:	कार्य विवरण:
+Per Day Price:	ದಿನಕ್ಕೆ ಬೆಲೆ:	प्रति दिन मूल्य:
+Expertise:	ಪರಿಣತಿ:	विशेषज्ञता:
+Availability:	ಲಭ್ಯತೆ:	उपलब्धता:
+Available	ಲಭ್ಯವಿದೆ	उपलब्ध
+Busy	ಕಾರ್ಯನಿರತ	व्यस्त
+Contact Number:	ಸಂಪರ್ಕ ಸಂಖ್ಯೆ:	संपर्क नंबर:
+Update Profile	ಪ್ರೊಫೈಲ್ ನವೀಕರಿಸಿ	प्रोफाइल अपडेट करें
+Register as a Worker	ಕಾರ್ಮಿಕರಾಗಿ ನೋಂದಾಯಿಸಿ	एक कर्मचारी के रूप में पंजीकरण करें
+Register	ನೋಂದಾಯಿಸಿ	रजिस्टर करें
+© KrishiJyoti - Worker Dashboard	© ಕೃಷಿಜ್ಯೋತಿ - ಕಾರ್ಮಿಕರ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್	© कृषिज्योति - कर्मचारी डैशबोर्ड
+
+
+
+
+

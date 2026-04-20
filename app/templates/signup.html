@@ -1,0 +1,142 @@
+{% extends 'auth.html' %} {% block title %} Signup {% endblock title %} {% block
+content %}
+<h1 class="mb-1"><span>Sign Up</span></h1>
+
+{% with messages=get_flashed_messages(with_categories=true) %} {% if messages %}
+{% for category, message in messages %}
+<div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+  {{message}}
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+{% endfor %} {% endif %} {% endwith %}
+
+<form method="POST" action="{{ url_for('signup') }}">
+  <div class="form-group">
+    <label for="username">UserName</label>
+    <input
+      type="text"
+      class="form-control mb-2"
+      name="username"
+      id="username"
+      required
+    />
+  </div>
+  <div class="form-group">
+    <label for="email">Email address</label>
+    <input
+      type="email"
+      class="form-control mb-2"
+      id="email"
+      name="email"
+      aria-describedby="emailHelp"
+      required
+    />
+    <small id="emailHelp" class="form-text text-muted"
+      >We'll never share your email with anyone else.</small
+    >
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input
+      type="password"
+      class="form-control mb-2"
+      name="password"
+      id="password"
+      required
+    />
+  </div>
+
+  <br />
+  <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+  <p class="mb-2 pb-0">Already User?</p>
+  <a href="/login" class="about-btn scrollto">Login</a>
+</form>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script>
+  // Your web app's Firebase configuration
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "firebase/app";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyBm6I0_Dl85h_eNqCOFxMmhWfQ21E8GvVM",
+    authDomain: "agri-mithra-ai.firebaseapp.com",
+    projectId: "agri-mithra-ai",
+    storageBucket: "agri-mithra-ai.firebasestorage.app",
+    messagingSenderId: "22278216712",
+    appId: "1:22278216712:web:7aec8cf23300cbb8b305bd",
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+
+  // Initialize Firebase
+  const app = firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const signupForm = document.getElementById("signup-form");
+
+    signupForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+      const username = signupForm.querySelector('input[name="username"]').value;
+      const email = signupForm.querySelector('input[name="email"]').value;
+      const password = signupForm.querySelector('input[name="password"]').value;
+
+      auth
+        .createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          return user.updateProfile({
+            displayName: username,
+          });
+        })
+        .then(() => {
+          // Profile updated, now send the ID token to the backend
+          return auth.currentUser.getIdToken();
+        })
+        .then((idToken) => {
+          fetch("/create_firebase_user", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              token: idToken,
+              username: username,
+              email: email,
+            }),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.success) {
+                window.location.href = "/login"; // Redirect to login page
+              } else {
+                alert("Signup failed: " + data.error);
+              }
+            })
+            .catch((error) => {
+              console.error("Error sending token to backend:", error);
+              alert("An error occurred during signup.");
+            });
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          alert("Firebase Signup failed: " + errorMessage);
+          console.error("Firebase Signup Error:", errorCode, errorMessage);
+        });
+    });
+  });
+</script>
+{% endblock content %}

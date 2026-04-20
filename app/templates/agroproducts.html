@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %}
+Agro Products
+{% endblock title %}
+
+{% block body %}
+    <h3 class="text-center mt-5 pt-5"><span>Agro Products</span></h3>
+
+    {% with messages=get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+        {{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> {# Add close button for BS5+ #}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <br>
+
+    <div class="container mt-3">
+        <div class="row">
+            {% for p in query %}
+            <div class="col-sm-4 mb-3">
+                <div class="card h-100">
+                    {# --- UPDATED: Display image from static folder using filename --- #}
+                    {% if p.image_filename %}
+                    {# url_for('static', filename='path/to/file') generates the URL #}
+                    <img src="{{ url_for('static', filename='images/' + p.image_filename) }}" class="card-img-top" alt="{{ p.productname }}" style="max-height: 200px; object-fit: cover;">
+                    {% else %}
+                    <div class="bg-light d-flex justify-content-center align-items-center text-muted" style="height: 200px;"> {# Added text-muted for better contrast #}
+                        <span>No Image Available</span>
+                    </div>
+                    {% endif %}
+                    {# --- END UPDATED --- #}
+
+                    <div class="card-body">
+                        <b><h5 class="card-title">{{ p.productname }}</h5></b>
+                        {# --- UPDATED: Display price with unit --- #}
+                        <b>Price : {{ p.price }} per {{ p.unit if p.unit else 'unit' }}</b> {# Added default 'unit' if somehow unit is missing #}
+                        {# --- END UPDATED --- #}
+                        <hr>
+                        <p class="card-text">{{ p.productdesc }}</p>
+                        <p>Owner : {{ p.username }}</p>
+                        <p>Email : {{ p.email }}</p>
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to={{ p.email }}" target="_blank" class="btn btn-success ">Purchase</a>
+                        {# Ensure p.user_id exists before comparison #}
+                        {% if current_user.is_authenticated and p.get('user_id') is not none and p.user_id == current_user.id %}
+                        <form method="POST" action="{{ url_for('deleteagroproduct', product_id=p.id) }}" class="mt-2">
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this product?')">Delete</button>
+                        </form>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock body %}

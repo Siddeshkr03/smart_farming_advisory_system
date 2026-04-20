@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ translations['add_agro_products_title'] }}
+{% endblock title %}
+
+{% block body %}
+
+<style>
+    body {
+        background: linear-gradient(to right, #e6ffe6, #ccffcc);
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    h3 span {
+        font-weight: bold;
+        color: #2e7d32;
+    }
+
+    .form-card {
+        background-color: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 128, 0, 0.1);
+        padding: 30px;
+    }
+
+    label {
+        font-weight: 500;
+        color: #1b5e20;
+    }
+
+    .btn-success {
+        background-color: #388e3c;
+        border: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-success:hover {
+        background-color: #2e7d32;
+    }
+
+    .form-text {
+        font-size: 0.85rem;
+        color: #4d774e;
+    }
+</style>
+
+<h3 class="text-center my-4"><span>{{ translations['add_agro_products_heading'] }}</span></h3>
+
+{% with messages=get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="form-card">
+
+                <form action="/addagroproduct" method="post" enctype="multipart/form-data">
+
+                    <div class="form-group mb-3">
+                        <label for="username">👨‍🌾 {{ translations['farmer_name'] }}</label>
+                        <input type="text" class="form-control" name="username" id="username" required
+                               value="{{ current_user.username if current_user.is_authenticated else (username if username is not none else '') }}"
+                               placeholder="{{ translations['farmer_name'] }}">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="email">📧 {{ translations['farmer_email'] }}</label>
+                        <input type="email" class="form-control" name="email" id="email" required
+                               placeholder="{{ translations['farmer_email_placeholder'] }}"
+                               value="{{ current_user.email if current_user.is_authenticated else (email if email is not none else '') }}">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="productname">🌽 {{ translations['product_name'] }}</label>
+                        <input type="text" class="form-control" name="productname" id="productname" required
+                               value="{{ productname if productname is not none else '' }}"
+                               placeholder="{{ translations['product_name'] }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="product_image" class="form-label">🖼️ {{ translations['upload_product_image'] }}</label>
+                        <input type="file" class="form-control" id="product_image" name="product_image" accept="image/*">
+                        <small class="form-text text-muted">{{ translations['image_upload_optional'] }}</small>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="productdesc">📄 {{ translations['product_description'] }}</label>
+                        <textarea class="form-control" name="productdesc" id="productdesc" rows="4" required
+                                  placeholder="{{ translations['product_description'] }}">{{ productdesc if productdesc is not none else '' }}</textarea>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="price">💰 {{ translations['price'] }}</label>
+                        <input type="number" class="form-control" name="price" id="price" step="0.01" required
+                               value="{{ price if price is not none else '' }}"
+                               placeholder="{{ translations['price'] }}">
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label for="unit">⚖️ {{ translations['unit'] }}</label>
+                        <select class="form-control" name="unit" id="unit" required>
+                            <option value="kg" {% if unit == 'kg' %}selected{% endif %}>{{ translations['kg'] }}</option>
+                            <option value="quintal" {% if unit == 'quintal' %}selected{% endif %}>{{ translations['quintal'] }}</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-success w-100">🌾 {{ translations['add_product_button'] }}</button>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

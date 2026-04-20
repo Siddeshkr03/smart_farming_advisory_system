@@ -1,0 +1,111 @@
+{% extends 'auth.html' %} {% block title %} Login {% endblock title %} {% block
+content %}
+<h1 class="mb-1"><span>Login</span></h1>
+
+{% with messages = get_flashed_messages(with_categories=true) %} {% if messages
+%} {% for category, message in messages %}
+<div
+  class="alert alert-{{ category }} alert-dismissible fade show"
+  role="alert"
+>
+  {{ message }}
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+{% endfor %} {% endif %} {% endwith %}
+
+<form id="login-form" class="text-white py-3 px-3">
+  <div class="form-group">
+    <label for="email">Email address</label>
+    <input
+      type="email"
+      class="form-control mb-2"
+      id="email"
+      name="email"
+      aria-describedby="emailHelp"
+      required
+    />
+    <small id="emailHelp" class="form-text text-muted"
+      >Enter your registered email address.</small
+    >
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input
+      type="password"
+      class="form-control mb-2"
+      name="password"
+      id="password"
+      required
+    />
+  </div>
+  <br />
+  <button type="submit" class="form-control bg-primary text-white">
+    Login
+  </button>
+  <p class="mb-2 pb-0">New User?</p>
+  <a href="/signup" class="about-btn scrollto">Sign Up</a>
+</form>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBm6I0_Dl85h_eNqCOFxMmhWfQ21E8GvVM",
+      authDomain: "agri-mithra-ai.firebaseapp.com",
+      projectId: "agri-mithra-ai",
+      storageBucket: "agri-mithra-ai.appspot.com",
+      messagingSenderId: "22278216712",
+      appId: "1:22278216712:web:7aec8cf23300cbb8b305bd"
+    };
+
+    // Initialize Firebase safely
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+    }
+
+    const auth = firebase.auth();
+    const form = document.getElementById("login-form");
+
+    form.addEventListener("submit", async function(e){
+        e.preventDefault();
+
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        try {
+            // Firebase login
+            const userCredential = await auth.signInWithEmailAndPassword(email, password);
+
+            // Get ID token
+            const idToken = await userCredential.user.getIdToken();
+
+            // Send token to Flask
+            const response = await fetch("/verify_token", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ token: idToken })
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                window.location.href = "/";
+            } else {
+                alert("Server login failed");
+            }
+
+        } catch (error) {
+            console.log(error);
+            alert(error.message);
+        }
+    });
+});
+</script>
+{% endblock content %}

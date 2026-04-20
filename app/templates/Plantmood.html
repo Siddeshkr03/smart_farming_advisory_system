@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Condition Advisor</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #0056b3;
+            text-align: center;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="number"],
+        select,
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Ensure padding doesn't affect width */
+        }
+         
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none; /* Safari and Chrome */
+            margin: 0; /* Remove spin buttons */
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .response-area {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9e9e9;
+            border-radius: 4px;
+            white-space: pre-wrap; /* Preserve line breaks and spaces */
+            word-wrap: break-word; /* Break long words */
+            border: 1px solid #ddd;
+            min-height: 50px; /* Ensure it has some height even when empty */
+            display: flex; /* Use flexbox to center content easily */
+            flex-direction: column; /* Stack children vertically */
+            align-items: center; /* Center horizontally */
+            justify-content: center; /* Center vertically when content is minimal */
+        }
+         .loading {
+            text-align: center;
+            font-style: italic;
+            color: #0056b3;
+            font-size: 1.2em;
+            font-weight: bold;
+            /* flex: 1; /* Allow loading indicator to take available space */
+            /* Removed temporary visibility styles */
+        }
+         .error {
+            color: red;
+            margin-top: 10px;
+         }
+         /* Removed .language-note styling */
+
+         /* Style for the actual recommendation paragraphs to ensure they don't center */
+        .response-area p:not(.loading):not(.error) {
+             align-self: flex-start; /* Align text to the start (left) */
+             text-align: left;
+             width: 100%; /* Take full width */
+             margin-bottom: 10px; /* Add some space between paragraphs */
+        }
+         .response-area p:last-child:not(.loading):not(.error) {
+             margin-bottom: 0; /* No bottom margin on the last paragraph */
+         }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Plant Condition Advisor</h1>
+        <p>Provide details about your plant and select your preferred language.</p>
+
+        <div class="input-group">
+            <label for="plantName">Plant Name:</label>
+            <input type="text" id="plantName" placeholder="e.g., Peace Lily">
+        </div>
+
+        <div class="input-group">
+            <label for="plantMood">Select Plant Mood:</label>
+            <select id="plantMood">
+                <option value="">-- Select a mood --</option>
+                <option value="Happy Plant">Happy Plant 🌱</option>
+                <option value="Stressed Plant">Stressed Plant 🍂</option>
+                <option value="Uncertain Mood">Uncertain Mood 🪴</option>
+            </select>
+        </div>
+
+         <div class="input-group">
+            <label for="temperature">Temperature (°C or °F):</label>
+            <input type="text" id="temperature" placeholder="e.g., 22°C or 72°F">
+        </div>
+
+        <div class="input-group">
+            <label for="moistureLevel">Soil Moisture Level (%):</label>
+            <input type="number" id="moistureLevel" placeholder="Enter percentage (0-100)" min="0" max="100">
+        </div>
+
+         <div class="input-group">
+            <label for="languageSelect">Select Response Language:</label>
+            <select id="languageSelect">
+                <option value="English">English</option>
+                <option value="Kannada">ಕನ್ನಡ (Kannada)</option>
+                <option value="Hindi">हिंदी (Hindi)</option>
+            </select>
+        </div>
+
+
+        <button id="getRecommendation">Get Recommendation</button>
+
+        <div class="response-area" id="recommendationOutput">
+            <p class="loading" style="display: none;">Data is processing...</p>
+             <p class="error" id="errorMessage" style="display: none;"></p>
+             </div>
+    </div>
+
+    <script>
+        const TOGETHER_API_KEY = "71f76fdbbde76b470cc7bb9eec62f07357398bf2c6cd8aed35e209b5aca69f9b"; // Replace with your actual API key
+        const TOGETHER_API_URL = 'https://api.together.xyz/v1/chat/completions';
+        const AI_MODEL = 'meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8'; // Using the model you identified
+
+        // Mapping moisture percentage ranges to conditions and descriptions
+        const moistureConditions = [
+            { range: [0, 10], condition: "Extremely Dry 🌵", description: "Soil is completely dry, unsuitable for plant growth." },
+            { range: [11, 20], condition: "Very Dry", description: "Minimal moisture, plants are likely under severe stress." },
+            { range: [21, 30], condition: "Dry", description: "Soil is dry, plants might start wilting without watering." },
+            { range: [31, 40], condition: "Moderately Dry", description: "Some moisture, but not enough for healthy plant growth." },
+            { range: [41, 50], condition: "Average Moisture 🌱", description: "Borderline condition; okay for hardy plants, needs watering." },
+            { range: [51, 60], condition: "Moist", description: "Ideal for most plants, supports steady growth." },
+            { range: [61, 70], condition: "Quite Moist", description: "Excellent moisture levels for healthy plant growth." },
+            { range: [71, 80], condition: "Wet", description: "Well-hydrated soil, perfect for water-loving plants." },
+            { range: [81, 90], condition: "Very Wet", description: "Soil is almost saturated, risk of waterlogging for some plants." },
+            { range: [91, 100], condition: "Waterlogged 💧", description: "Excess water, roots may suffocate or rot if not drained." }
+        ];
+
+        // Function to get moisture condition based on percentage
+        function getMoistureDetails(percentage) {
+            if (percentage === null || percentage < 0 || percentage > 100) {
+                return null; // Invalid percentage
+            }
+            for (const mc of moistureConditions) {
+                if (percentage >= mc.range[0] && percentage <= mc.range[1]) {
+                    return mc;
+                }
+            }
+             if (percentage === 100) { // Explicitly handle 100% edge case if needed
+                  return { range: [91, 100], condition: "Waterlogged 💧", description: "Excess water, roots may suffocate or rot if not drained." };
+             }
+            return null;
+        }
+
+
+        const plantNameInput = document.getElementById('plantName');
+        const plantMoodSelect = document.getElementById('plantMood');
+        const temperatureInput = document.getElementById('temperature');
+        const moistureLevelInput = document.getElementById('moistureLevel');
+        const languageSelect = document.getElementById('languageSelect');
+        const getRecommendationButton = document.getElementById('getRecommendation');
+        const recommendationOutput = document.getElementById('recommendationOutput');
+        // Get references to the specific elements within the output area
+        const loadingIndicator = recommendationOutput.querySelector('.loading');
+        const errorMessage = recommendationOutput.querySelector('.error');
+        // Removed the languageNote variable
+
+        getRecommendationButton.addEventListener('click', async () => {
+            const plantName = plantNameInput.value.trim();
+            const plantMood = plantMoodSelect.value;
+            const temperature = temperatureInput.value.trim();
+            const moistureLevel = parseInt(moistureLevelInput.value, 10); // Parse as integer
+            const selectedLanguage = languageSelect.value; // Get selected language
+
+            // Basic validation
+            if (!plantName || !plantMood || !temperature || isNaN(moistureLevel) || moistureLevel < 0 || moistureLevel > 100) {
+                errorMessage.textContent = 'Please fill in all fields correctly (Moisture % must be 0-100).';
+                errorMessage.style.display = 'block';
+                 // Hide loading if validation fails
+                loadingIndicator.style.display = 'none';
+                 // Clear any previous successful output
+                recommendationOutput.querySelectorAll('p:not(.loading):not(.error)').forEach(el => el.remove());
+
+                return;
+            } else {
+                 errorMessage.style.display = 'none'; // Hide error message if valid
+            }
+
+
+            const moistureDetails = getMoistureDetails(moistureLevel);
+             if (!moistureDetails) {
+                 errorMessage.textContent = 'Invalid moisture percentage.';
+                 errorMessage.style.display = 'block';
+                 loadingIndicator.style.display = 'none';
+                 recommendationOutput.querySelectorAll('p:not(.loading):not(.error)').forEach(el => el.remove());
+                 return;
+             }
+
+
+            // Clear previous recommendation output, show loading, hide error
+            // Select all paragraph elements that are NOT the loading or error and remove them
+             recommendationOutput.querySelectorAll('p:not(.loading):not(.error)').forEach(el => el.remove());
+
+            loadingIndicator.style.display = 'block'; // Show loading
+            errorMessage.style.display = 'none'; // Hide error message
+             // Removed languageNote.style.display = 'block';
+
+
+            // Construct the detailed prompt for the AI
+            const userPrompt = `I have a plant named "${plantName}".
+Its current mood is "${plantMood}".
+The temperature it is experiencing is "${temperature}".
+The soil moisture level is ${moistureLevel}%. Based on standard charts, this corresponds to a "${moistureDetails.condition}" condition, described as "${moistureDetails.description}".
+
+Considering the plant name, its current mood, the temperature, and the specific soil moisture condition, please provide a brilliant suggestion or a series of actionable, step-by-step instructions to improve the plant's condition.
+
+If the condition suggests it might be difficult to improve significantly or the situation is critical, provide an appropriate description of the situation and realistic expectations.
+
+Focus on practical advice covering aspects like watering adjustments, light requirements, soil considerations, temperature tolerance, or any other relevant factors based on the provided details.
+
+Provide the response in a descriptive, helpful, and encouraging tone, formatted clearly with steps where applicable.
+
+Please provide the response in ${selectedLanguage}.`;
+
+
+            try {
+                const response = await fetch(TOGETHER_API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${TOGETHER_API_KEY}`
+                    },
+                    body: JSON.stringify({
+                        model: AI_MODEL,
+                        messages: [
+                             {
+                                role: "system",
+                                content: `You are a helpful and knowledgeable plant care assistant. You provide clear, actionable advice based on user-provided plant conditions. Respond in the language requested by the user.`
+                            },
+                            {
+                                role: "user",
+                                content: userPrompt
+                            }
+                        ]
+                    })
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                     throw new Error(`API Error: ${response.status} - ${errorData.message || response.statusText}`);
+                }
+
+                const data = await response.json();
+                // Assuming the structure of the response has the content in data.choices[0].message.content
+                const aiRecommendation = data.choices[0].message.content;
+
+                // Display the recommendation - create new paragraph elements for the content
+                 const recommendationTitle = document.createElement('p');
+                 recommendationTitle.innerHTML = `<strong>Recommendation for ${plantName} (${plantMood}):</strong>`;
+                 const recommendationText = document.createElement('p');
+                 recommendationText.textContent = aiRecommendation; // Use textContent to avoid HTML injection
+
+
+                 // Append the new paragraphs after the loading/error elements
+                 recommendationOutput.appendChild(recommendationTitle);
+                 recommendationOutput.appendChild(recommendationText);
+
+
+            } catch (error) {
+                console.error('Error fetching recommendation:', error);
+                 errorMessage.textContent = `Error getting recommendation: ${error.message}. Please try again later.;` ;
+                 errorMessage.style.display = 'block';
+                 // Hide loading on error
+                 loadingIndicator.style.display = 'none';
+                 // Ensure any partially added content is cleared if there was an error after starting fetch
+                 recommendationOutput.querySelectorAll('p:not(.loading):not(.error)').forEach(el => el.remove());
+
+
+            } finally {
+                // This block always runs after try or catch
+                loadingIndicator.style.display = 'none'; // Hide loading indicator
+            }
+        });
+
+    </script>
+
+</body>
+</html>

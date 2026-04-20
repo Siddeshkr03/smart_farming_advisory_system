@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}
+    {{ translations['farmer_register'] }}
+{% endblock title %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1>{{ translations['farmer_registration'] }}</h1>
+        <form method="POST">
+            <div class="mb-3">
+                <label for="farmername" class="form-label">{{ translations['farmer_name'] }}</label>
+                <input type="text" class="form-control" id="farmername" name="farmername" required>
+            </div>
+            <div class="mb-3">
+                <label for="adharnumber" class="form-label">{{ translations['aadhaar_number'] }}</label>
+                <input type="text" class="form-control" id="adharnumber" name="adharnumber" required>
+            </div>
+            <div class="mb-3">
+                <label for="age" class="form-label">{{ translations['age'] }}</label>
+                <input type="number" class="form-control" id="age" name="age">
+            </div>
+            <div class="mb-3">
+                <label for="gender" class="form-label">{{ translations['gender'] }}</label>
+                <select class="form-select" id="gender" name="gender">
+                    <option value="male">{{ translations['male'] }}</option>
+                    <option value="female">{{ translations['female'] }}</option>
+                    <option value="other">{{ translations['other'] }}</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="phonenumber" class="form-label">{{ translations['phone_number'] }}</label>
+                <input type="tel" class="form-control" id="phonenumber" name="phonenumber">
+            </div>
+            <div class="mb-3">
+                <label for="address" class="form-label">{{ translations['address'] }}</label>
+                <textarea class="form-control" id="address" name="address"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="farming_type" class="form-label">{{ translations['farming_type'] }}</label>
+                <select class="form-select" id="farming_type" name="farming_type">
+                    {% for farming in farming_types %}
+                        <option value="{{ farming.id }}">{{ farming.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">{{ translations['register_farmer'] }}</button>
+        </form>
+    </div>
+{% endblock body %}

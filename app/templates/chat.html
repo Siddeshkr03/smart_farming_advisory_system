@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>KrishiBot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"/>
+  <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            background: #e6f2f2;
+            height: 100vh; /* Ensures body takes full viewport height */
+            overflow: hidden; /* Prevents body scrollbars */
+        }
+
+        .container {
+            display: flex; /* Arranges sidebar and chat-container side-by-side */
+            height: 100vh; /* Ensures the container takes full viewport height */
+        }
+
+        .sidebar {
+            width: 25%;
+            background: #f5f5f5;
+            padding: 1rem;
+            overflow-y: auto; /* Allows scrolling for chat history if content overflows */
+            border-right: 1px solid #ccc;
+        }
+
+        .sidebar h3 {
+            margin-top: 0;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar li {
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .sidebar li:hover {
+            background-color: #ddd;
+        }
+
+        .sidebar li.active-chat {
+            background-color: #00b3b3;
+            color: white;
+            font-weight: bold;
+        }
+
+        .chat-container {
+            width: 75%; /* Takes the remaining width */
+            display: flex;
+            flex-direction: column; /* Stacks header, messages, and input vertically */
+            background: white;
+            border-radius: 0 20px 20px 0; /* Applies border-radius only to the right side */
+            box-shadow: -2px 0 15px rgba(0, 0, 0, 0.05);
+            height: 100%; /* IMPORTANT: Changed from 100vh to 100% to fill its flex parent (.container) */
+            overflow: hidden; /* Prevents chat-container scrollbars unless content overflows messages */
+        }
+
+        .chat-header {
+            background-color: #00b3b3;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .lang-dropdown select {
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .chat-messages {
+            flex: 1; /* This makes the message area take up all available vertical space */
+            min-height: 0; /* Ensures flex item can shrink */
+            padding: 20px;
+            overflow-y: auto; /* Enables scrolling for messages */
+            background-color: #f9f9f9;
+            scrollbar-width: thin;
+            scrollbar-color: #aab7b7 #e0e0e0;
+        }
+
+        .chat-messages::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: #e0e0e0;
+            border-radius: 10px;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background-color: #aab7b7;
+            border-radius: 10px;
+        }
+
+        .message-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            clear: both; /* Ensures messages don't float incorrectly */
+        }
+
+        .message {
+            padding: 12px 16px;
+            border-radius: 15px;
+            max-width: 80%;
+            line-height: 1.5;
+            word-wrap: break-word;
+        }
+
+        .message.user {
+            background-color: #c2f0f0;
+            align-self: flex-end; /* Aligns user messages to the right */
+            margin-left: auto; /* Pushes user messages to the right */
+            text-align: right;
+            color: #333;
+        }
+
+        .message.bot {
+            background-color: #e0e0e0;
+            align-self: flex-start; /* Aligns bot messages to the left */
+            margin-right: auto; /* Pushes bot messages to the left */
+            color: #333;
+            display: flex; /* Needed if you plan to add icons/elements inside bot messages */
+            align-items: center;
+        }
+
+        .speaker-icon {
+            margin-left: 10px;
+            cursor: pointer;
+            font-size: 1.2em;
+            color: #00b3b3;
+        }
+
+        .chat-input {
+            display: flex; /* Arranges input field and buttons horizontally */
+            padding: 10px 15px;
+            border-top: 1px solid #ccc;
+            background: white;
+            align-items: center;
+        }
+
+        .chat-input input {
+            flex: 1; /* Allows input field to take most available space */
+            padding: 12px 15px;
+            border-radius: 20px;
+            border: 1px solid #ccc;
+            outline: none;
+            margin-right: 10px;
+        }
+
+        .chat-input button {
+            padding: 12px 20px;
+            background: #00b3b3;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .chat-input button:hover {
+            background: #009999;
+        }
+
+        .mic-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            padding: 10px;
+            font-size: 1.5em;
+            color: #555;
+        }
+
+        .mic-button:hover {
+            color: #00b3b3;
+        }
+
+        .mic-recording {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container"> <div class="sidebar">
+            <h3>Chat History</h3>
+            <ul id="chatList">
+                {# Example chat history items (replace with your dynamic content) #}
+                <li onclick="loadChat('chat1')" data-chat-id="chat1">ನಾನು ಆಶಿಕುಮನ್ನು, ಹೇಗೆ ಬೆಳೆಸಬೇಕು</li>
+                <li onclick="loadChat('chat2')" data-chat-id="chat2">how to grow rice</li>
+                <li onclick="loadChat('chat3')" data-chat-id="chat3" class="active-chat">hello</li>
+                {% for chat_item in chats %}
+                    <li onclick="loadChat('{{ chat_item.id }}')" data-chat-id="{{ chat_item.id }}" class="{{ 'active-chat' if current_chat_id == chat_item.id else '' }}">
+                        {{ chat_item.title }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="chat-container">
+            <div class="chat-header">
+                <h2>🌾 KrishiBot</h2>
+                <div class="lang-dropdown">
+                    <label for="language">🌐 Language:</label>
+                    <select id="language">
+                        <option value="en">English</option>
+                        <option value="hi">Hindi</option>
+                        <option value="ta">Tamil</option>
+                        <option value="kn" selected>Kannada</option>
+                        <option value="te">Telugu</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="chat-messages" id="chat">
+                {# Example messages (replace with your dynamic content) #}
+                <div class="message-container">
+                    <div class="message bot">Hello! How can I assist you with your farming inquiries today?</div>
+                </div>
+                {% if messages %}
+                    {% for msg in messages %}
+                        <div class="message-container">
+                            <div class="message {{ msg['role'] }}">{{ msg['text'] }}</div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="chat-input">
+                <input type="text" id="userInput" placeholder="Ask something about farming..." />
+                <button onclick="sendMessage()">Send</button>
+                <button class="mic-button" id="micButton">🎤</button>
+            </div>
+        </div>
+    </div><script>
+    // These will be injected by your Flask template
+    // const LOGGED_IN_USER_ID = "{{ current_user.id }}";
+    // let initialChatId = "{{ current_chat_id if current_chat_id else '' }}";
+
+    // For testing directly in browser or if template variables aren't set up yet, you can use placeholders,
+    // but ensure they are correctly set by Flask in your actual application.
+    const LOGGED_IN_USER_ID = "{{ current_user.id|default('test_user_id', true) }}"; // Replace with actual Flask variable
+    let initialChatId = "{{ current_chat_id|default('', true) }}"; // Replace with actual Flask variable
+
+    let isSpeaking = false;
+    let isRecording = false;
+    let recognition;
+    let voices = [];
+    let currentChatId = initialChatId || null;
+
+    window.speechSynthesis.onvoiceschanged = () => {
+        voices = speechSynthesis.getVoices();
+    };
+
+    function speakMessage(text, lang) {
+        if (!('speechSynthesis' in window)) {
+            alert('Your browser does not support text-to-speech.');
+            return;
+        }
+        if (isSpeaking) {
+            speechSynthesis.cancel();
+            isSpeaking = false;
+        }
+        const utterance = new SpeechSynthesisUtterance(text);
+        const langMap = {
+            en: 'en-US', hi: 'hi-IN', ta: 'ta-IN',
+            kn: 'kn-IN', te: 'te-IN'
+        };
+        const selectedLang = langMap[lang] || 'en-US';
+        utterance.lang = selectedLang;
+        
+        // Ensure voices are loaded before trying to find one
+        const allVoices = speechSynthesis.getVoices();
+        const voice = allVoices.find(v => v.lang === selectedLang);
+        if (voice) {
+            utterance.voice = voice;
+        } else {
+            console.warn(`No voice found for language: ${selectedLang}. Using default.`);
+        }
+
+        utterance.onstart = () => { isSpeaking = true; };
+        utterance.onend = () => { isSpeaking = false; };
+
+        speechSynthesis.speak(utterance);
+    }
+
+    function addMessage(message, sender = "bot") {
+        const chat = document.getElementById("chat");
+        const msgContainer = document.createElement("div");
+        msgContainer.className = "message-container";
+
+        const msg = document.createElement("div");
+        msg.className = sender === "user" ? "message user" : "message bot";
+        msg.innerText = message;
+        msgContainer.appendChild(msg);
+
+        if (sender === "bot") {
+            const speakerIcon = document.createElement("span");
+            speakerIcon.className = "speaker-icon";
+            speakerIcon.innerText = "🔊";
+            speakerIcon.onclick = () => speakMessage(message, document.getElementById("language").value);
+            msgContainer.appendChild(speakerIcon);
+        }
+
+        chat.appendChild(msgContainer);
+        chat.scrollTop = chat.scrollHeight;
+        return msg;
+    }
+
+    async function sendMessage() {
+        const input = document.getElementById("userInput");
+        const language = document.getElementById("language").value;
+        const userText = input.value.trim();
+        if (!userText) return;
+
+        if (!LOGGED_IN_USER_ID || LOGGED_IN_USER_ID === 'test_user_id') {
+            addMessage("⚠️ Error: User not identified. Please ensure you are logged in.", "bot");
+            console.error("LOGGED_IN_USER_ID is not set correctly. Value:", LOGGED_IN_USER_ID);
+            return;
+        }
+
+        addMessage(userText, "user");
+        input.value = "";
+
+        const thinkingMsg = addMessage("🤖 KrishiBot is thinking...", "bot");
+
+        try {
+            const payload = {
+                text: userText,
+                lang: language,
+                // user_id: LOGGED_IN_USER_ID // Backend gets user_id from current_user
+            };
+            if (currentChatId) {
+                payload.chat_id = currentChatId;
+            }
+
+            const response = await fetch("/chat", { // This is your chat_response endpoint
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({ detail: "Unknown server error" }));
+                throw new Error(errorData.detail || `Server error: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            thinkingMsg.closest('.message-container').remove();
+
+            addMessage(data.response, "bot");
+            
+            const returnedChatId = data.chat_id;
+            if (currentChatId !== returnedChatId) { // If it's a new chat or chat ID changed
+                currentChatId = returnedChatId;
+                loadChats(); // Refresh sidebar to show new chat and highlight it
+            } else if (!document.querySelector(`#chatList li[data-chat-id="${currentChatId}"]`)) {
+                 // If current chat is not in list (e.g. list was empty initially)
+                loadChats();
+            }
+
+
+        } catch (error) {
+            console.error("❌ Server Error or Network Issue:", error);
+            thinkingMsg.closest('.message-container').remove();
+            addMessage(`❗ Error sending message: ${error.message}. Please try again.`, "bot");
+        }
+    }
+
+    function startRecognition() {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRecognition) {
+            alert('Your browser does not support speech recognition.');
+            addMessage("Speech recognition is not supported by your browser.", "bot");
+            return;
+        }
+
+        recognition = new SpeechRecognition();
+        recognition.continuous = false;
+        recognition.interimResults = false;
+
+        const selectedLanguage = document.getElementById("language").value;
+        const langMap = {
+            en: 'en-US', hi: 'hi-IN', ta: 'ta-IN',
+            kn: 'kn-IN', te: 'te-IN'
+        };
+        recognition.lang = langMap[selectedLanguage] || 'en-US';
+
+        recognition.onresult = (event) => {
+            const transcript = event.results[0][0].transcript;
+            document.getElementById("userInput").value = transcript;
+            sendMessage(); // Automatically send after recognition
+        };
+
+        recognition.onerror = (event) => {
+            console.error('Speech recognition error:', event.error);
+            let errorMessage = "Speech recognition error. Please try again.";
+            if (event.error === 'no-speech') {
+                errorMessage = "No speech detected. Please try speaking clearly.";
+            } else if (event.error === 'audio-capture') {
+                errorMessage = "Microphone not found or not working. Please check your microphone settings.";
+            } else if (event.error === 'not-allowed') {
+                errorMessage = "Permission to use microphone was denied. Please allow access in your browser settings.";
+            } else if (event.error === 'network') {
+                errorMessage = "Network error during speech recognition. Please check your internet connection.";
+            }
+            addMessage(errorMessage, "bot");
+            stopRecognition(); // Ensure UI resets
+        };
+
+        recognition.onend = stopRecognition; // UI reset when recognition ends for any reason
+
+        try {
+            recognition.start();
+            isRecording = true;
+            const micButton = document.getElementById("micButton");
+            micButton.classList.add("mic-recording");
+            micButton.innerText = "🔴"; // Recording indicator
+        } catch (e) {
+            console.error("Error starting recognition:", e);
+            addMessage("Could not start voice recognition. Please check permissions.", "bot");
+            stopRecognition();
+        }
+    }
+
+    function stopRecognition() {
+        if (recognition && isRecording) {
+            recognition.stop();
+        }
+        isRecording = false;
+        const micButton = document.getElementById("micButton");
+        micButton.classList.remove("mic-recording");
+        micButton.innerText = "🎤"; // Default mic icon
+    }
+
+    document.getElementById("micButton").addEventListener("click", () => {
+        if (!isRecording) {
+            startRecognition();
+        } else {
+            stopRecognition(); // Allow manual stop
+        }
+    });
+
+    document.getElementById("language").addEventListener("change", () => {
+        if (isRecording) stopRecognition(); // Stop recording if language changes
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+        if (!LOGGED_IN_USER_ID || LOGGED_IN_USER_ID === 'test_user_id') {
+             console.warn("User ID not properly set from Flask template. Chat history might not work.");
+             addMessage("Welcome! User identification is pending. Chat history may not load correctly.", "bot");
+        } else {
+             addMessage("👋 Hello! How can I assist you with your farming inquiries today?", "bot");
+        }
+
+        // Ensure voices are loaded
+        voices = speechSynthesis.getVoices();
+        if (voices.length === 0) {
+            speechSynthesis.onvoiceschanged = () => {
+                voices = speechSynthesis.getVoices();
+                // If a message was pending TTS, could re-trigger here or handle appropriately
+            };
+        }
+        
+        // Load chats for the sidebar
+        // The initial messages for a specific chat (if initialChatId is set)
+        // should be rendered by the server. loadChat() below handles dynamic loading.
+        loadChats();
+
+        if (initialChatId && LOGGED_IN_USER_ID && LOGGED_IN_USER_ID !== 'test_user_id') {
+            // If server already rendered messages for initialChatId,
+            // loadChat will just ensure highlighting.
+            // If not, it will fetch messages.
+            // loadChat(initialChatId); // Server-side rendering for /chat/<chat_id> should handle messages.
+                                   // We just need to make sure the correct one is highlighted.
+                                   // loadChats will handle highlighting.
+        }
+    });
+
+    async function loadChats() { // Loads/Refreshes the chat list in the sidebar
+        if (!LOGGED_IN_USER_ID || LOGGED_IN_USER_ID === 'test_user_id') {
+            console.warn("Cannot load chats: User ID is not available.");
+            const list = document.getElementById('chatList');
+            list.innerHTML = '<li>User not identified. History unavailable.</li>';
+            return;
+        }
+        try {
+            const res = await fetch(`/get_chats/${LOGGED_IN_USER_ID}`);
+            if (!res.ok) {
+                throw new Error(`Failed to fetch chats: ${res.status}`);
+            }
+            const chats = await res.json();
+            const list = document.getElementById('chatList');
+            list.innerHTML = ''; // Clear current list
+
+            if (chats.length === 0) {
+                list.innerHTML = '<li>No chat history found.</li>';
+            } else {
+                chats.forEach(chat => {
+                    const li = document.createElement('li');
+                    li.innerText = chat.title || 'Untitled Chat';
+                    li.dataset.chatId = chat.id; // Store chat ID for easy access
+                    li.onclick = () => loadChat(chat.id);
+                    if (chat.id === currentChatId) {
+                        li.classList.add('active-chat'); // Highlight current chat
+                    }
+                    list.appendChild(li);
+                });
+            }
+        } catch (error) {
+            console.error("Error loading chats:", error);
+            const list = document.getElementById('chatList');
+            list.innerHTML = '<li>Error loading chat history.</li>';
+        }
+    }
+
+    async function loadChat(chatId) { // Loads messages for a specific chat into the main window
+        if (!LOGGED_IN_USER_ID || LOGGED_IN_USER_ID === 'test_user_id') {
+            addMessage("⚠️ User not identified. Cannot load chat messages.", "bot");
+            return;
+        }
+        
+        // Update currentChatId and UI
+        currentChatId = chatId;
+        document.querySelectorAll('#chatList li').forEach(li => li.classList.remove('active-chat'));
+        const activeLi = document.querySelector(`#chatList li[data-chat-id="${chatId}"]`);
+        if (activeLi) {
+            activeLi.classList.add('active-chat');
+        } else {
+            // If the chat list hasn't loaded this chat_id yet (e.g. on direct page load to a chat)
+            // loadChats() should eventually add it and highlight it.
+        }
+
+
+        const chatBox = document.getElementById('chat');
+        chatBox.innerHTML = ''; // Clear current messages
+        addMessage("🔄 Loading messages...", "bot"); // Loading indicator
+
+        try {
+            const res = await fetch(`/get_messages/${LOGGED_IN_USER_ID}/${chatId}`);
+            if (!res.ok) {
+                throw new Error(`Failed to fetch messages: ${res.status}`);
+            }
+            const messages = await res.json();
+            chatBox.innerHTML = ''; // Clear loading indicator
+
+            if (messages.length === 0) {
+                addMessage("No messages in this chat yet.", "bot");
+            } else {
+                messages.forEach(msg => {
+                    addMessage(msg.text, msg.role);
+                });
+            }
+        } catch (error) {
+            console.error("Error loading messages:", error);
+            chatBox.innerHTML = ''; // Clear loading indicator
+            addMessage(`❗ Error loading messages: ${error.message}.`, "bot");
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worker Dashboard - KrishiJyoti</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}">
+    <style>
+        /* Basic styling for dashboard, adapt as needed */
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding-top: 70px; /* Adjust if header height changes */
+            padding-bottom: 50px; /* Adjust if footer height changes */
+            background: linear-gradient(to bottom, #f0f8ff, #e0f7fa);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        #header { /* Assuming you have a standard header */
+            background-color: #28a745; color: white; padding: 10px 20px; /* Reduced padding */
+            text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            height: 50px; /* Fixed height for header */
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .container-header { display: flex; justify-content: space-between; align-items: center; width:100%; padding: 0 15px;}
+        .logo h1 { margin: 0; font-size: 1rem; }
+        .logo a { color: white; text-decoration: none;}
+        .user-actions a { color: white; text-decoration: none; padding: 6px 10px; border-radius: 5px; background-color: #007bff; margin-left: 6px; font-size: 0.7rem; }
+        .user-actions a:hover { background-color: #0056b3; }
+
+        main {
+            flex-grow: 1;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100%;
+        }
+        .dashboard-container {
+            background-color: #fff;
+            padding: 25px 30px; /* Increased padding */
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.15); /* Softer shadow */
+            width: 100%;
+            max-width: 650px; /* Slightly wider */
+        }
+        .dashboard-container h2 {
+            color: #28a745;
+            text-align: center;
+            margin-bottom: 25px; /* Increased margin */
+            font-size: 1.8rem; /* Larger title */
+        }
+        .form-group { margin-bottom: 18px; } /* Increased margin */
+        .form-group label { display: block; margin-bottom: 6px; font-weight: bold; color: #333; font-size:0.9rem; }
+        .form-group input[type="text"],
+        .form-group input[type="number"],
+        .form-group input[type="email"],
+        .form-group input[type="file"],
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px; /* Increased padding */
+            border: 1px solid #ccc; /* Lighter border */
+            border-radius: 5px; /* More rounded */
+            box-sizing: border-box;
+            font-size: 0.9rem;
+        }
+        .form-group input[type="file"] { padding: 8px; } /* Specific padding for file input */
+        .form-group textarea { min-height: 100px; } /* Taller textarea */
+        .btn-submit {
+            background-color: #28a745;
+            color: white;
+            padding: 12px 25px; /* Increased padding */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+            display: block;
+            width: 100%;
+            margin-top: 20px; /* Increased margin */
+        }
+        .btn-submit:hover { background-color: #218838; }
+        .current-image-container { margin-top:10px; margin-bottom:15px; text-align: center; }
+        .current-image { max-width: 120px; max-height: 120px; border-radius: 50%; border: 3px solid #28a745; object-fit: cover;}
+        #footer { /* Assuming you have a standard footer */
+            background-color: #28a745; color: white; text-align: center;
+            padding: 10px 0; /* Standard padding */
+            font-size: 0.8rem; /* Smaller font */
+            margin-top:auto; /* Pushes footer down */
+        }
+        /* Flash messages styling */
+        .flash-messages { list-style: none; padding: 0; margin: 0 0 20px 0; }
+        .flash-messages li { padding: 12px 15px; margin-bottom: 10px; border-radius: 5px; font-size: 0.9rem; border: 1px solid transparent; }
+        .flash-messages .error { background-color: #f8d7da; color: #721c24; border-color: #f5c6cb;}
+        .flash-messages .success { background-color: #d4edda; color: #155724; border-color: #c3e6cb;}
+        .flash-messages .warning { background-color: #fff3cd; color: #856404; border-color: #ffeeba;}
+        .flash-messages .info { background-color: #d1ecf1; color: #0c5460; border-color: #bee5eb;}
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="container-header">
+            <div class="logo"><h1><a href="/">KrishiJyoti</a></h1></div>
+            <div class="user-actions">
+                <a href="{{ url_for('worker_home') }}">Public Listings</a>
+                {% if current_user and current_user.role == 'worker' %}
+                    <a href="{{ url_for('worker_logout') }}">Logout</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="dashboard-container">
+            <h2>{{ "Update Your Profile" if worker_data else "Register Your Worker Profile" }}</h2>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                <ul class="flash-messages">
+                {% for category, message in messages %}
+                  <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+              {% endif %}
+            {% endwith %}
+
+            <form method="POST" action="{{ url_for('save_worker_profile') }}" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="name">Full Name:</label>
+                    <input type="text" id="name" name="name" value="{{ worker_data.name if worker_data else '' }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="profile_image">Profile Image (PNG, JPG, GIF):</label>
+                    <input type="file" id="profile_image" name="profile_image" accept="image/png, image/jpeg, image/gif, image/jpg">
+                    {% if worker_data and worker_data.imageUrl %}
+                        <div class="current-image-container">
+                            <p>Current Image:</p>
+                            <img src="{{ url_for('static', filename='images/' + worker_data.imageUrl) }}" alt="Current Profile Image" class="current-image">
+                        </div>
+                    {% elif worker_data and not worker_data.imageUrl %}
+                         <p>No profile image uploaded yet.</p>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="expertise">Expertise (e.g., Ploughing, Sowing, Harvesting):</label>
+                    <input type="text" id="expertise" name="expertise" value="{{ worker_data.expertise if worker_data else '' }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="experience">Experience (e.g., 5 years, Beginner):</label>
+                    <input type="text" id="experience" name="experience" value="{{ worker_data.experience if worker_data else '' }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="work_details">More about your work/skills:</label>
+                    <textarea id="work_details" name="work_details" rows="4">{{ worker_data.workDetails if worker_data else '' }}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="per_day_price">Price per Day (₹):</label>
+                    <input type="number" id="per_day_price" name="per_day_price" value="{{ worker_data.perDayPrice if worker_data else '' }}" step="0.01" min="0" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact_number">Contact Number (10 digits):</label>
+                    <input type="tel" id="contact_number" name="contact_number"
+                           value="{{ worker_data.contactNumber if worker_data else '' }}"
+                           pattern="[0-9]{10}"
+                           minlength="10"
+                           maxlength="10"
+                           title="Please enter a 10-digit contact number." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="availability">Availability:</label>
+                    <select id="availability" name="availability">
+                        <option value="Available" {% if worker_data and worker_data.availability == 'Available' %}selected{% endif %}>Available</option>
+                        <option value="Busy" {% if worker_data and worker_data.availability == 'Busy' %}selected{% endif %}>Busy</option>
+                        <option value="Unavailable" {% if worker_data and worker_data.availability == 'Unavailable' %}selected{% endif %}>Unavailable</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-submit">
+                    {{ "Update Profile" if worker_data and worker_data.doc_id else "Register Profile" }}
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <footer id="footer">
+        &copy; Copyright <strong>KrishiJyoti</strong>. All Rights Reserved | Designed by Keshav T M
+    </footer>
+</body>
+</html>

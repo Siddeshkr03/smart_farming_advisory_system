@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ translations['farmer_details'] }}
+{% endblock %}
+
+{% block body %}
+    <h3 class="text-center text-success my-4">
+        🌾 <span>{{ translations['farmer_details'] }}</span> 🌿
+    </h3>
+
+    {% with messages=get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="container mt-4">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle shadow-sm rounded bg-white">
+                <thead class="table-success text-center">
+                    <tr>
+                        <th>{{ translations['rid'] }}</th>
+                        <th>{{ translations['farmer_name'] }}</th>
+                        <th>{{ translations['aadhaar_number'] }}</th>
+                        <th>{{ translations['age'] }}</th>
+                        <th>{{ translations['gender'] }}</th>
+                        <th>{{ translations['phone_number'] }}</th>
+                        <th>{{ translations['address'] }}</th>
+                        <th>{{ translations['farming'] }}</th>
+                        <th>{{ translations['delete'] }}</th>
+                        <th>{{ translations['add_agro_product'] }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for post in query %}
+                        <tr class="text-center">
+                            <td>{{ post.id }}</td>
+                            <td>{{ post.farmername }}</td>
+                            <td>{{ post.adharnumber }}</td>
+                            <td>{{ post.age }}</td>
+                            <td>{{ post.gender }}</td>
+                            <td>{{ post.phonenumber }}</td>
+                            <td>{{ post.address }}</td>
+                            <td>{{ post.farming }}</td>
+                            <td>
+                                <a href="/delete/{{ post.id }}">
+                                    <button onclick='return confirm("Are you sure to delete this data?");'
+                                            class="btn btn-outline-danger btn-sm">
+                                        {{ translations['delete'] }}
+                                    </button>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="/addagroproduct">
+                                    <button class="btn btn-outline-success btn-sm">
+                                        {{ translations['add'] }}
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <style>
+        body {
+            background: #f7fff7;
+        }
+        h3 span {
+            font-weight: bold;
+            color: #2e7d32;
+        }
+        .table th,
+        .table td {
+            vertical-align: middle;
+        }
+        .btn {
+            transition: transform 0.2s ease-in-out;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+        }
+    </style>
+{% endblock %}

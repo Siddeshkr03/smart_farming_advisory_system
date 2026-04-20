@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h2>Your Orders</h2>
+
+{% if orders %}
+    <ul class="list-group">
+        {% for order in orders %}
+            <li class="list-group-item mb-3">
+                <h5>Order ID: {{ order.id }}</h5>
+                <p><strong>Order Date:</strong> {{ order.get('order_date').strftime('%Y-%m-%d %H:%M:%S') }}</p>
+                <p><strong>Total Amount:</strong> ₹{{ order.get('total_amount') }}</p>
+                <p><strong>Payment Method:</strong> {{ order.get('payment_method') }}</p>
+                <p><strong>Order Status:</strong> {{ order.get('order_status') }}</p>
+                {% if order.get('estimated_delivery') %}
+                    <p><strong>Estimated Delivery:</strong> {{ order.get('estimated_delivery').strftime('%Y-%m-%d %H:%M:%S') }}</p>
+                {% endif %}
+
+                <h6>Items Bought:</h6>
+                <ul>
+                    {% for item in order.get('items', []) %}
+                        <li>{{ item.get('name') }} (Quantity: {{ item.get('quantity') }})</li>
+                    {% endfor %}
+                </ul>
+
+                <details>
+                    <summary>Delivery Address</summary>
+                    <p>Name: {{ order.get('delivery_address').get('name') }}</p>
+                    <p>Phone: {{ order.get('delivery_address').get('phone') }}</p>
+                    <p>Address: {{ order.get('delivery_address').get('address_line1') }}{% if order.get('delivery_address').get('address_line2') %}, {{ order.get('delivery_address').get('address_line2') }}{% endif %}, {{ order.get('delivery_address').get('city') }}, {{ order.get('delivery_address').get('state') }} - {{ order.get('delivery_address').get('pincode') }}</p>
+                </details>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>You haven't placed any orders yet.</p>
+{% endif %}
+
+{% endblock body %}

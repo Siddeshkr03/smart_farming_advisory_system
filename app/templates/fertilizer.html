@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fertilizer Recommendation</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        #input-area label {
+            display: inline-block;
+            width: 150px;
+            text-align: right;
+            margin-right: 10px;
+        }
+
+        #input-area input[type="text"],
+        #input-area select {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 200px;
+        }
+
+        #input-area button {
+            display: block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: 160px;
+        }
+
+        #output-area {
+            margin-top: 30px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        #prediction-result {
+            font-size: 18px;
+            font-weight: bold;
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Fertilizer Recommendation System</h1>
+        <div id="input-area">
+            <label for="temperature">Temperature (°C):</label>
+            <input type="text" id="temperature" name="temperature"><br><br>
+
+            <label for="humidity">Humidity (%):</label>
+            <input type="text" id="humidity" name="humidity"><br><br>
+
+            <label for="moisture">Moisture Level:</label>
+            <input type="text" id="moisture" name="moisture"><br><br>
+
+            <label for="soil_type">Soil Type:</label>
+            <select id="soil_type" name="soil_type">
+                <option value="Sandy">Sandy</option>
+                <option value="Loamy">Loamy</option>
+                <option value="Black">Black</option>
+                <option value="Red">Red</option>
+                <option value="Clayey">Clayey</option>
+            </select><br><br>
+
+            <label for="crop_type">Crop Type:</label>
+            <select id="crop_type" name="crop_type">
+                <option value="Maize">Maize</option>
+                <option value="Sugarcane">Sugarcane</option>
+                <option value="Cotton">Cotton</option>
+                <option value="Tobacco">Tobacco</option>
+                <option value="Paddy">Paddy</option>
+                <option value="Barley">Barley</option>
+                <option value="Wheat">Wheat</option>
+                <option value="Millets">Millets</option>
+                <option value="Oil seeds">Oil seeds</option>
+                <option value="Pulses">Pulses</option>
+                <option value="Ground Nuts">Ground Nuts</option>
+            </select><br><br>
+
+            <label for="nitrogen">Nitrogen (N):</label>
+            <input type="text" id="nitrogen" name="nitrogen"><br><br>
+
+            <label for="potassium">Potassium (K):</label>
+            <input type="text" id="potassium" name="potassium"><br><br>
+
+            <label for="phosphorous">Phosphorous (P):</label>
+            <input type="text" id="phosphorous" name="phosphorous"><br><br>
+
+            <button onclick="predictFertilizer()">Recommend Fertilizer</button>
+        </div>
+
+        <div id="output-area">
+            <h2>Recommended Fertilizer:</h2>
+            <p id="prediction-result"></p>
+        </div>
+    </div>
+
+    <script>
+        function predictFertilizer() {
+            const temperature = document.getElementById('temperature').value;
+            const humidity = document.getElementById('humidity').value;
+            const moisture = document.getElementById('moisture').value;
+            const soil_type = document.getElementById('soil_type').value;
+            const crop_type = document.getElementById('crop_type').value;
+            const nitrogen = document.getElementById('nitrogen').value;
+            const potassium = document.getElementById('potassium').value;
+            const phosphorous = document.getElementById('phosphorous').value;
+
+            const inputData = {
+                temperature: parseFloat(temperature),
+                humidity: parseFloat(humidity),
+                moisture: parseFloat(moisture),
+                soil_type: soil_type,
+                crop_type: crop_type,
+                nitrogen: parseFloat(nitrogen),
+                potassium: parseFloat(potassium),
+                phosphorous: parseFloat(phosphorous)
+            };
+
+            fetch('/predict_fertilizer', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ model_name: 'fertilizer_name', input_data: inputData })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('prediction-result').innerText = data.prediction;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('prediction-result').innerText = 'Error in prediction!';
+            });
+        }
+    </script>
+</body>
+</html>

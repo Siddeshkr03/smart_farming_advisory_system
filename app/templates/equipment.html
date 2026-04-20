@@ -1,0 +1,225 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Equipment Rental
+{% endblock title %}
+
+{% block style %}
+    <style>
+        /* Internal CSS for improved visibility and layout */
+        body {
+            background-color: #f0f2f5;
+        }
+
+        .container.mt-3 {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+        }
+
+        .col-md-3 {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        .col-md-3 h3 {
+            color: black !important;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-weight: bold;
+            background-color: #d3d3d3;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        .col-md-3 ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .col-md-3 ul li a {
+            color: #333 !important;
+            text-decoration: none;
+            display: block;
+            padding: 5px 0;
+            border-bottom: 1px solid #f8f9fa;
+        }
+
+        .col-md-3 ul li a:last-child {
+            border-bottom: none;
+        }
+
+        .col-md-3 ul li a:hover {
+            color: #007bff !important;
+            background-color: #f8f9fa;
+        }
+
+        .col-md-3 hr {
+            margin-top: 15px;
+            margin-bottom: 15px;
+            border-top: 1px solid #ccc;
+        }
+
+        .col-md-9 {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+        }
+
+        .col-md-9 h2 {
+            background-color: #d3d3d3;
+            padding: 5px 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        .row.row-cols-1.row-cols-md-3.g-4 {
+            display: flex; /* Enable flexbox for the row */
+            flex-wrap: wrap; /* Allow items to wrap to the next line */
+            margin-left: -15px; /* Adjust for gutter */
+            margin-right: -15px; /* Adjust for gutter */
+        }
+
+        .row.row-cols-1.row-cols-md-3.g-4 > div {
+            background-color: #fff;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            margin-bottom: 20px; /* Add more margin between items */
+            width: calc(33.33% - 30px); /* Set a base width for three columns, accounting for margin */
+            margin-left: 15px; /* Add gutter */
+            margin-right: 15px; /* Add gutter */
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+            display: flex; /* Enable flexbox for the content within each item */
+            flex-direction: column; /* Stack content vertically */
+            justify-content: space-between; /* Distribute space between elements */
+        }
+
+        /* Adjust for smaller screen sizes (less than md) */
+        @media (max-width: 767.98px) {
+            .row.row-cols-1.row-cols-md-3.g-4 > div {
+                width: calc(100% - 30px); /* Full width on smaller screens */
+            }
+        }
+
+        /* Adjust for medium screen sizes (md) */
+        @media (min-width: 768px) and (max-width: 991.98px) {
+            .row.row-cols-1.row-cols-md-3.g-4 > div {
+                width: calc(50% - 30px); /* Two columns on medium screens */
+            }
+        }
+
+        .row.row-cols-1.row-cols-md-3.g-4 h3 {
+            color: #0056b3;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .row.row-cols-1.row-cols-md-3.g-4 p {
+            margin-bottom: 5px;
+        }
+
+         /* Style for the image */
+        .equipment-image {
+            max-width: 100%; /* Ensure image doesn't overflow its container */
+            height: auto; /* Maintain aspect ratio */
+            margin-bottom: 10px; /* Add some space below the image */
+            border-radius: 4px; /* Optional: adds rounded corners */
+        }
+
+        .row.row-cols-1.row-cols-md-3.g-4 form,
+        .row.row-cols-1.row-cols-md-3.g-4 a.btn {
+            margin-top: 10px;
+        }
+
+        .btn {
+            margin-right: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        .btn-info {
+            background-color: #17a2b8;
+            color: white;
+            border-color: #17a2b8;
+        }
+
+        .btn-info:hover {
+            background-color: #117a8b;
+            border-color: #117a8b;
+        }
+
+        .btn-secondary {
+            border-color: #6c757d;
+        }
+    </style>
+{% endblock style %}
+
+{% block body %}
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-3">
+            <h3>Categories</h3>
+            <ul>
+                <li><a href="{{ url_for('equipment') }}" class="{% if not current_category %}active{% endif %}">All
+                        Categories</a></li>
+                {% for category in categories %}
+                <li><a href="{{ url_for('equipment', category=category) }}"
+                       class="{% if current_category == category %}active{% endif %}">{{ category }}</a></li>
+                {% endfor %}
+            </ul>
+            <hr>
+            <h3>Brands</h3>
+            <ul>
+                <li><a href="{{ url_for('equipment') }}" class="{% if not current_brand %}active{% endif %}">All
+                        Brands</a></li>
+                {% for brand in brands %}
+                <li><a href="{{ url_for('equipment', brand=brand) }}"
+                       class="{% if current_brand == brand %}active{% endif %}">{{ brand }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-md-9">
+            <h2>Available Equipment</h2>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for item in equipment %}
+                <div>
+                    {# Add the image tag here #}
+                    {% if item.image %}
+                        <img src="{{ url_for('static', filename='images/' + item.image) }}" alt="{{ item.name }}" class="equipment-image">
+                    {% else %}
+                        {# Optional: Display a placeholder image or message if no image is available #}
+                        <img src="{{ url_for('static', filename='images/placeholder.png') }}" alt="No image available" class="equipment-image">
+                    {% endif %}
+
+                    <h3>{{ item.name }}</h3>
+                    <p>Price: Rs {{ item.price }}</p>
+                    <p>Available: {{ item.available_quantity }}</p>
+
+                    <form action="{{ url_for('add_to_cart') }}" method="post">
+                        <input type="hidden" name="equipment_id" value="{{ item.id }}">
+                        <button type="submit" class="btn btn-primary">Add to Cart</button>
+                    </form>
+
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}

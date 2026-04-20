@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container my-5">
+  <h2 class="mb-4">Your Shopping Cart</h2>
+
+  {% if cart_items %}
+    {% for item in cart_items %}
+      <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">{{ item.get('name') }}</h5>
+          <p class="card-text">Price: ₹{{ item.get('price') }}</p>
+
+          <div class="row align-items-center mb-2">
+            <div class="col-md-3 col-sm-6">
+              <label for="quantity-{{ item.id }}"><strong>Quantity:</strong></label>
+              <form method="POST" action="/cart/update/{{ item.id }}" class="form-inline mt-1">
+                <input type="number" id="quantity-{{ item.id }}" name="quantity" class="form-control form-control-sm mr-2" value="{{ item.get('quantity') }}" min="1">
+                <button type="submit" class="btn btn-sm btn-primary">Update</button>
+              </form>
+            </div>
+            <div class="col-md-3 col-sm-6 mt-2 mt-sm-0">
+              <form method="POST" action="/cart/remove/{{ item.id }}">
+                <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+              </form>
+            </div>
+          </div>
+
+          <p class="font-weight-bold mt-2">Subtotal: ₹{{ item.get('price') * item.get('quantity') }}</p>
+        </div>
+      </div>
+    {% endfor %}
+
+    <div class="card bg-light p-3">
+      <h4>Total Amount: ₹{{ total_amount }}</h4>
+    </div>
+
+    <div class="alert alert-info mt-4" role="alert">
+      <strong>Interested in renting these tools or vehicles?</strong><br>
+      Contact us at: <a href="tel:+919019110252" class="alert-link">+91 9019110252</a>
+    </div>
+
+  {% else %}
+    <div class="alert alert-warning">Your cart is empty.</div>
+  {% endif %}
+</div>
+{% endblock body %}

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>{% block title %}{% endblock title %}</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  {% block style %}{% endblock style %}
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800"
+    rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/venobox/venobox.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/owl.carousel/assets/owl.carousel.min.css') }}"
+    rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/aos/aos.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/css/style.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .language-dropdown {
+      position: relative;
+    }
+
+    .language-toggle {
+      display: flex;
+      align-items: center;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 5px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .language-dropdown-menu {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: #343a40;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 5px;
+      list-style: none;
+      padding: 0;
+      margin-top: 5px;
+      display: none;
+      z-index: 1000;
+      min-width: 120px;
+    }
+
+    .language-dropdown-menu a {
+      display: block;
+      padding: 8px 15px;
+      color: white;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .language-dropdown-menu a:hover {
+      background-color: #495057;
+      color: #28a745;
+    }
+  </style>
+
+
+</head>
+
+<body>
+  <header id="header">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
+        <a class="navbar-brand mr-5" href="/">Krishi Mithra</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="/">{{ translations['home'] }}</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('agroproducts') }}">{{ translations['agro_products'] }}</a></li>
+            <li class="nav-item"><a class="nav-link" href="/chat">{{ translations['ai_help'] }}</a></li>
+            <li class="nav-item"><a class="nav-link" href="/worker">{{ translations['hire_labour'] }}</a></li>
+            <li class="nav-item"><a class="nav-link" href="/preone">{{ translations['soil_test'] }}</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('equipment') }}">{{
+                translations['equipment_rental'] }}</a></li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="moreDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                {{ translations['more'] }}
+              </a>
+
+              <div class="dropdown-menu dropdown-menu-right bg-dark" aria-labelledby="moreDropdown">
+                <a class="dropdown-item text-white" href="/register">{{ translations['farmer_register'] }}</a>
+                <a class="dropdown-item text-white" href="/addfarming">{{ translations['add_farming'] }}</a>
+                <a class="dropdown-item text-white" href="/farmerdetails">{{ translations['farmer_details'] }}</a>
+            
+                <a class="dropdown-item text-white" href="/map">{{ translations['map'] }}</a>
+                <a class="dropdown-item text-white" href="https://www.commodityonline.com/mandiprices/state/karnataka">{{
+                  translations['live_prices'] }}</a>
+                <a class="dropdown-item text-white" href="/transport">{{ translations['transport'] }}</a>
+                <a class="dropdown-item text-white" href="https://ipm.ucanr.edu/PMG/diseases/diseaseslist.html">{{
+                  translations['disease'] }}</a>
+                <a class="dropdown-item text-white" href="/plant_disease_detection">{{ translations['plant_disease_detection'] }}</a>
+                <!-- <a class="dropdown-item text-white" href="/Plantmood">{{ translations['plant_condition'] }}</a> -->
+                <a class="dropdown-item text-white" href="{{ url_for('cart') }}">{{ translations['cart'] }}</a>
+                <a class="dropdown-item text-white" href="/croproadmap">{{ translations['crop_roadmap'] }}</a>
+                <a class="dropdown-item text-white" href="/govschems">{{ translations['gov_schems'] }}</a>
+               
+                {% if current_user.is_authenticated %}
+                <div class="dropdown-divider"></div>
+                <span class="dropdown-item-text text-light">{{ translations['welcome'] }} {{ current_user.username
+                  }}</span>
+                {% endif %}
+              </div>
+
+            </li>
+            {% if current_user.is_authenticated %}
+            <li class="nav-item"><a class="nav-link" href="/logout">{{ translations['logout'] }}</a></li>
+            {% else %}
+            <li class="nav-item"><a class="nav-link" href="/signup">{{ translations['signup'] }}</a></li>
+            {% endif %}
+
+
+            <li class="nav-item dropdown language-dropdown">
+              <div class="nav-link language-toggle dropdown-toggle" onclick="toggleLanguageDropdown()">
+                🌐 <span id="current-language">English</span>
+              </div>
+              <ul class="language-dropdown-menu" id="language-dropdown">
+                <li><a href="#" onclick="setLanguage('en', 'English')">English</a></li>
+                <li><a href="#" onclick="setLanguage('hi', 'हिन्दी')">हिन्दी</a></li>
+                <li><a href="#" onclick="setLanguage('kn', 'ಕನ್ನಡ')">ಕನ್ನಡ</a></li>
+              </ul>
+            </li>
+
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+
+  {% if request.path == '/' %}
+<section id="intro">
+  <div class="intro-container" data-aos="zoom-in" data-aos-delay="100">
+    <h1 class="mb-4 pb-0">
+      {{ translations['smart_agriculture'] }}
+    </h1>
+    <a href="{{ url_for('agroproducts') }}" class="about-btn">
+      {{ translations['agro_products'] }}
+    </a>
+  </div>
+</section>
+{% endif %}
+  <main id="main">
+
+    {% block body %}
+    {% with messages=get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+      {{message}}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    {% endblock body %}
+
+    <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
+
+    <script src="{{ url_for('static', filename='assets/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/vendor/jquery.easing/jquery.easing.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/vendor/php-email-form/validate.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/vendor/venobox/venobox.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/vendor/owl.carousel/owl.carousel.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/vendor/superfish/superfish.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/vendor/hoverIntent/hoverIntent.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/vendor/aos/aos.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+      const languageDropdown = document.getElementById('language-dropdown');
+      const languageToggle = document.querySelector('.language-toggle');
+      const currentLanguageSpan = document.getElementById('current-language');
+
+      function toggleLanguageDropdown() {
+        languageDropdown.style.display = languageDropdown.style.display === 'block' ? 'none' : 'block';
+      }
+
+      function setLanguage(langCode, langName) {
+        document.cookie = "language=" + langCode + ";path=/";
+        currentLanguageSpan.textContent = langName;
+        languageDropdown.style.display = 'none';
+        window.location.reload();
+      }
+
+      window.onload = function () {
+        const cookies = document.cookie.split(';');
+        let currentLangCode = 'en';
+        let currentLangName = 'English';
+
+        for (let i = 0; i < cookies.length; i++) {
+          let cookie = cookies[i].trim();
+          if (cookie.startsWith("language=")) {
+            currentLangCode = cookie.substring("language=".length);
+            break;
+          }
+        }
+
+        if (currentLangCode === 'kn') {
+          currentLangName = 'ಕನ್ನಡ';
+        } else if (currentLangCode === 'hi') {
+          currentLangName = 'हिन्दी';
+        }
+
+        currentLanguageSpan.textContent = currentLangName;
+      };
+
+      window.addEventListener('click', function (event) {
+        if (languageToggle && !languageToggle.contains(event.target) && languageDropdown && !languageDropdown.contains(event.target)) {
+          languageDropdown.style.display = 'none';
+        }
+      });
+    </script>
+
+
+</body>
+
+</html>
+
+

@@ -1,0 +1,13 @@
+Flask
+Flask-Login
+Flask-WTF
+firebase-admin
+requests
+numpy
+pandas
+scikit-learn
+tensorflow
+torch
+torchvision
+Pillow
+gunicorn
